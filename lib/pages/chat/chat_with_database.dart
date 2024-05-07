@@ -51,7 +51,7 @@ class _ChatWithDatabaseState extends State<ChatWithDatabase> {
   }
 
   askGptFromDB() async {
-    print('Asking...');
+    print('Asking..');
     print(await ScoutGPTService.askGPT("En que lenguaje programa lambot?"));
   }
 
