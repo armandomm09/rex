@@ -15,8 +15,12 @@ class ChatBubble extends StatelessWidget {
       return Container(
         height: 60,
         width: 100,
-        child: TypingIndicator(
-          showIndicator: true,
+        child: const Row(
+          children: [
+            TypingIndicator(
+              showIndicator: true,
+            ),
+          ],
         ));
     } else {
     return Container(

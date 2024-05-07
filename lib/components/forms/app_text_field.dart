@@ -6,7 +6,7 @@ class AppTextField extends StatelessWidget {
   final double width;
   final TextEditingController controller;
   final onChanged;
-  final focusNode;
+  final FocusNode? focusNode;
   final Function(String)? onSubmitted;
   const AppTextField(
       {super.key,
