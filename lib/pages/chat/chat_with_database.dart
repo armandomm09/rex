@@ -9,6 +9,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 
 class ChatWithDatabase extends StatefulWidget {
   const ChatWithDatabase({super.key});
@@ -18,7 +19,36 @@ class ChatWithDatabase extends StatefulWidget {
 }
 
 class _ChatWithDatabaseState extends State<ChatWithDatabase> {
+  FocusNode focusNode = FocusNode();
+  ScrollController scrollController = ScrollController();
+
   final AuthService authService = AuthService();
+
+  @override
+  void initState(){
+    focusNode.addListener(() {
+      if(focusNode.hasFocus){
+
+        Future.delayed(const Duration(milliseconds: 500),
+        () => scrollDown());
+      }
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose(){ 
+    focusNode.dispose();
+    messageController.dispose();
+    scrollController.dispose();
+    super.dispose();
+  }
+  scrollDown() {
+    scrollController.animateTo(
+      scrollController.position.maxScrollExtent, 
+      duration: const Duration(seconds: 1), 
+      curve: Curves.bounceInOut);
+  }
 
   askGptFromDB() async {
     print('Asking...');
@@ -34,6 +64,7 @@ class _ChatWithDatabaseState extends State<ChatWithDatabase> {
         children: [
           Expanded(
             child: AppTextField(
+              focusNode: focusNode,
               hintText: "Message",
               controller: messageController,
             ),
@@ -62,6 +93,7 @@ class _ChatWithDatabaseState extends State<ChatWithDatabase> {
 
   buildMessageList() {
     return StreamBuilder(
+        
         stream: ScoutGPTService.getMessages(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
@@ -73,6 +105,7 @@ class _ChatWithDatabaseState extends State<ChatWithDatabase> {
           }
 
           return ListView(
+            controller: scrollController,
             children: snapshot.data!.docs
                 .map((doc) => buildMessageItem(doc))
                 .toList(),
