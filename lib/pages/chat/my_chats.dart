@@ -5,13 +5,12 @@ import 'package:chat_app/pages/chat/chat_page.dart';
 import 'package:chat_app/services/auth/auth_service.dart';
 import 'package:chat_app/components/materialApp/app_drawer.dart';
 import 'package:chat_app/services/chat/chat_service.dart';
-import 'package:chat_app/services/openai/scout_gpt.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MyChats extends StatefulWidget {
-  MyChats({super.key});
+  const MyChats({super.key});
 
   @override
   State<MyChats> createState() => _MyChatsState();
@@ -95,7 +94,7 @@ class _MyChatsState extends State<MyChats> {
           onRefresh: () async {  },
           child: ListView.separated(
             separatorBuilder: (context, index) {
-              return SizedBox(height: 10,);
+              return const SizedBox(height: 10,);
             },
             itemCount: usersData.length,
             itemBuilder: (context, index) {

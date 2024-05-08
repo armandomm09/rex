@@ -21,12 +21,8 @@
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="LaunchImage" translatesAutoresizingMaskIntoConstraints="NO" id="YRO-k0-Ey4">
                                 <rect key="frame" x="196.33333333333334" y="426" width="0.33333333333334281" height="0.33333333333331439"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="backgroundImg" translatesAutoresizingMaskIntoConstraints="NO" id="s7Z-1R-TAo">
-                                <rect key="frame" x="-172" y="-122" width="751" height="1232"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="redPngLoogo" translatesAutoresizingMaskIntoConstraints="NO" id="w4q-uz-UZ5">
-                                <rect key="frame" x="45" y="324" width="316" height="227"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="dominiSplash" translatesAutoresizingMaskIntoConstraints="NO" id="Idh-Fw-qgk">
+                                <rect key="frame" x="-110" y="0.0" width="605" height="866"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
@@ -44,7 +40,6 @@
     </scenes>
     <resources>
         <image name="LaunchImage" width="0.3333333432674408" height="0.3333333432674408"/>
-        <image name="backgroundImg" width="740" height="1266"/>
-        <image name="redPngLoogo" width="1757" height="1797"/>
+        <image name="dominiSplash" width="2880" height="5120"/>
     </resources>
 </document>

@@ -3,9 +3,7 @@ import 'package:chat_app/components/generals/app_text.dart';
 import 'package:chat_app/components/materialApp/app_drawer.dart';
 import 'package:chat_app/components/visualization/line_chart.dart';
 import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -14,7 +12,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: const AppDrawer(),
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
@@ -40,7 +38,7 @@ class HomePage extends StatelessWidget {
                         height: MediaQuery.of(context).size.height * 0.125,
                       ),
                       Padding(
-                        padding: EdgeInsets.only(top: 0.0),
+                        padding: const EdgeInsets.only(top: 0.0),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -61,10 +59,10 @@ class HomePage extends StatelessWidget {
               padding: const EdgeInsets.all(20),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: Container(
+                child: const SizedBox(
                   height: 100,
                   //width: 100, // Utiliza el ancho máximo disponible
-                  child: const Center(
+                  child: Center(
                       child: AppText(
                     text: " B E L I E V E !!",
                     textColor: TextColor.red,
@@ -84,22 +82,22 @@ class HomePage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      child: CircularProgressIndicator.adaptive(),
                       height: 100,
                       width: 100,
                       color: Theme.of(context).colorScheme.inversePrimary,
+                      child: const CircularProgressIndicator.adaptive(),
                     ),
                     Container(
-                      child: CircularProgressIndicator.adaptive(),
                       height: 100,
                       width: 100,
                       color: Theme.of(context).colorScheme.inversePrimary,
+                      child: const CircularProgressIndicator.adaptive(),
                     ),
                     Container(
-                      child: CircularProgressIndicator.adaptive(),
                       height: 100,
                       width: 100,
                       color: Theme.of(context).colorScheme.inversePrimary,
+                      child: const CircularProgressIndicator.adaptive(),
                     ),
                   ],
                 ),
@@ -133,7 +131,7 @@ class HomePage extends StatelessWidget {
                         ),
                       );
                     },
-                    options: CarouselOptions(height: 100, autoPlay: true, autoPlayInterval: Duration(seconds: 3)))),
+                    options: CarouselOptions(height: 100, autoPlay: true, autoPlayInterval: const Duration(seconds: 3)))),
           ),
           SliverToBoxAdapter(
             child: Padding(

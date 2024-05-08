@@ -1,7 +1,4 @@
 import 'package:chat_app/pages/databaseSearch/favorite_teams.dart';
-import 'package:chat_app/pages/publicSearch/analyze_match.dart';
-import 'package:chat_app/pages/publicSearch/team_inevent_details.dart';
-import 'package:chat_app/pages/publicSearch/team_season_details.dart';
 import 'package:chat_app/services/auth/login_or_register.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +24,7 @@ class AuthGate extends StatelessWidget {
 
           if(snapshot.hasData){
             setCurrentRegional("Monterrey");
-            return FavoriteTeams();//TeamDetails( teamNickname: "Imperator", team: "5887", eventKey: "2024mxpu");
+            return const FavoriteTeams();//TeamDetails( teamNickname: "Imperator", team: "5887", eventKey: "2024mxpu");
           } else {
             return const LoginOrRegisterPage();
           }      

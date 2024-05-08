@@ -3,7 +3,6 @@ import 'package:chat_app/models/gpt_message.dart';
 import 'package:chat_app/services/firebase/scout_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:ssh2/ssh2.dart';
 import 'package:uuid/uuid.dart';
 
@@ -17,7 +16,7 @@ class ScoutGPTService{
 
   static newGptMessage(String question) async {
 
-    final GptMessage message = GptMessage(currentUserID, currentUserEmail, question, Timestamp.now(), Uuid().v1());
+    final GptMessage message = GptMessage(currentUserID, currentUserEmail, question, Timestamp.now(), const Uuid().v1());
 
     try {
       await firestore
@@ -53,7 +52,7 @@ class ScoutGPTService{
 
   static newGPTAnswer(String question) async {
     try {
-      String loadingMessageUuid = Uuid().v1();
+      String loadingMessageUuid = const Uuid().v1();
       GptMessage loadingMessage = GptMessage('chatGPT', 'chatGPT@imperator.com', "-LOADING-", Timestamp.now(), loadingMessageUuid);
       await firestore
       .collection('Users')

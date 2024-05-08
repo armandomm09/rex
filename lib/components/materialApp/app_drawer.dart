@@ -3,17 +3,11 @@ import 'package:chat_app/pages/databaseSearch/favorite_teams.dart';
 import 'package:chat_app/pages/home_page.dart';
 import 'package:chat_app/pages/publicSearch/analyze_match.dart';
 import 'package:chat_app/pages/chat/my_chats.dart';
-import 'package:chat_app/pages/databaseSearch/robot_list.dart';
-import 'package:chat_app/pages/databaseSearch/scouts_stream.dart';
-import 'package:chat_app/pages/publicSearch/match_details.dart';
-import 'package:chat_app/pages/publicSearch/team_season_details.dart';
-import 'package:chat_app/pages/scout/my_scouts.dart';
 import 'package:chat_app/pages/scout/search_page.dart';
 import 'package:chat_app/services/auth/auth_service.dart';
 import 'package:chat_app/pages/settings/settings_page.dart';
 import 'package:chat_app/services/auth/authgate.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
@@ -21,14 +15,14 @@ class AppDrawer extends StatelessWidget {
   void signOut(BuildContext context){
     final auth = AuthService();
     auth.signOut();
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => AuthGate()));
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const AuthGate()));
   }
   
   
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       child:  Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -44,18 +38,18 @@ class AppDrawer extends StatelessWidget {
 
                 ),
               ),
-              SizedBox(height: 30,),
+              const SizedBox(height: 30,),
               Padding(
                 padding: const EdgeInsets.only(left: 25),
                 child: ListTile(
                   title: Text("H O M E", style: TextStyle(fontFamily: "Industry", color: Theme.of(context).colorScheme.inversePrimary,)),
                   leading: Icon(Icons.home, color: Theme.of(context).colorScheme.inversePrimary,),
                   onTap: () {
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomePage()));
                   },
                 ),
               ),
-              SizedBox(height: 12,),
+              const SizedBox(height: 12,),
 
              
 
@@ -70,7 +64,7 @@ class AppDrawer extends StatelessWidget {
                     ),
               ),
 
-              SizedBox(height: 12,),
+              const SizedBox(height: 12,),
 
               Padding(
                 padding: const EdgeInsets.only(left: 25),
@@ -118,7 +112,7 @@ class AppDrawer extends StatelessWidget {
                   },
                     ),
               ),*/
-              SizedBox(height: 12,),
+              const SizedBox(height: 12,),
 
               Padding(
                 padding: const EdgeInsets.only(left: 25),
@@ -131,7 +125,7 @@ class AppDrawer extends StatelessWidget {
                     ),
               ),
 
-               SizedBox(height: 12,),
+               const SizedBox(height: 12,),
 
               Padding(
                 padding: const EdgeInsets.only(left: 25),
@@ -139,7 +133,7 @@ class AppDrawer extends StatelessWidget {
                   title: Text("C H A T  W I T H  D B", style: TextStyle(fontFamily: "Industry", color: Theme.of(context).colorScheme.inversePrimary,)),
                   leading: Icon(Icons.chat_bubble_outline, color: Theme.of(context).colorScheme.inversePrimary,),
                   onTap: () {
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>  ChatWithDatabase()));
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>  const ChatWithDatabase()));
                   },
                     ),
               ),
@@ -150,12 +144,12 @@ class AppDrawer extends StatelessWidget {
                   title: Text("C H A T", style: TextStyle(fontFamily: "Industry", color: Theme.of(context).colorScheme.inversePrimary,)),
                   leading: Icon(Icons.chat_bubble_outline, color: Theme.of(context).colorScheme.inversePrimary,),
                   onTap: () {
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>  MyChats()));
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>  const MyChats()));
                   },
                     ),
               ),
 
-               SizedBox(height: 12,),
+               const SizedBox(height: 12,),
 
            
               

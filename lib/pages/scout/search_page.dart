@@ -1,8 +1,6 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
-import 'package:chat_app/components/generals/app_button.dart';
 import 'package:chat_app/components/materialApp/app_drawer.dart';
 import 'package:chat_app/components/generals/app_text.dart';
 import 'package:chat_app/components/forms/app_text_field.dart';
@@ -10,13 +8,7 @@ import 'package:chat_app/components/forms/counter.dart';
 import 'package:chat_app/components/forms/form_dropdown.dart';
 import 'package:chat_app/models/match_scout.dart';
 import 'package:chat_app/services/firebase/scout_service.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:counter/counter.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:http/http.dart' as http;
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -97,9 +89,10 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
   Future<void> fetchTeam(String teamNumber) async {
     var apiKey =
         "WFoNaSbMFws9MIaRrXrSTbglBWpv60ZUZi96Pmg4XFzPY828s5DT5NATHORA2OUs";
-    var url = 'https://www.thebluealliance.com/api/v3/team/frc' + teamNumber;
+    var url = 'https://www.thebluealliance.com/api/v3/team/frc$teamNumber';
 
     if (teamNumber.isNotEmpty && teamNumber.length <= 4) {
+      // ignore: unused_local_variable, prefer_typing_uninitialized_variables
       var postsJson2;
       try {
         print("fetching...");
@@ -143,7 +136,7 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
             _isScrollingDown
                 ? scrollController.position.maxScrollExtent
                 : scrollController.position.minScrollExtent,
-            duration: Duration(milliseconds: 500),
+            duration: const Duration(milliseconds: 500),
             curve: Curves.easeInOut,
           );
           setState(() {
@@ -151,19 +144,19 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
           });
         },
         child: AnimatedSwitcher(
-          duration: Duration(milliseconds: 800),
+          duration: const Duration(milliseconds: 800),
           transitionBuilder: (child, animation) => RotationTransition(
             turns: animation,
             child: child,
           ),
           child: Icon(
             _isScrollingDown ? Icons.arrow_downward : Icons.arrow_upward,
-            color: Theme.of(context).colorScheme.background,
+            color: Theme.of(context).colorScheme.surface,
             key: ValueKey<bool>(_isScrollingDown),
           ),
         ),
       ),
-      drawer: AppDrawer(),
+      drawer: const AppDrawer(),
       //backgroundColor: Colors.transparent,
       appBar: AppBar(
           elevation: 50,
@@ -199,7 +192,6 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
   }
 
   buildHorizontalLayout() {
-    String selectedValue;
     return Column(
       children: [
         const SizedBox(
@@ -253,12 +245,12 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
           children: [
             FormDropdown(
               title: "Match type",
-              listOfItems: ["Qualis", "Practice", "Playoffss"],
+              listOfItems: const ["Qualis", "Practice", "Playoffss"],
               controller: matchController,
             ),
             FormDropdown(
                 title: "Color of their alliance",
-                listOfItems: ["Blue", "Red"],
+                listOfItems: const ["Blue", "Red"],
                 controller: allianceColorController),
           ],
         ),
@@ -304,7 +296,7 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
             ),
             FormDropdown(
               title: "Note scoring accuracy:",
-              listOfItems: ["Perfect", "Avarage"],
+              listOfItems: const ["Perfect", "Avarage"],
               controller: autoNoteScoringAccuracyController,
             ),
           ],
@@ -357,7 +349,7 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
               width: 150,
               controller: teleopSpeakerNotesController,
             ),
-            SizedBox(
+            const SizedBox(
               width: 20,
             ),
             AppCounter(
@@ -372,12 +364,12 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
           children: [
             FormDropdown(
               title: "Speaker scoring accuracy:",
-              listOfItems: ["Perfect", "Avarage"],
+              listOfItems: const ["Perfect", "Avarage"],
               controller: teleopSpeakerAccuracyController,
             ),
             FormDropdown(
               title: "Amp scoring accuracy:",
-              listOfItems: ["Perfect", "Avarage"],
+              listOfItems: const ["Perfect", "Avarage"],
               controller: teleopAmpAccuracyController,
             ),
           ],
@@ -398,7 +390,7 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
               width: 150,
               controller: teleopTimesAmplifiedController,
             ),
-            SizedBox(
+            const SizedBox(
               width: 20,
             ),
             AppCounter(
@@ -425,12 +417,12 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
           children: [
             FormDropdown(
               title: "Offense quality?",
-              listOfItems: ["None", "Effective", "Bad"],
+              listOfItems: const ["None", "Effective", "Bad"],
               controller: offenseQualityController,
             ),
             FormDropdown(
               title: "Deffense quality?",
-              listOfItems: ["Pinning", "Block", "Zoning"],
+              listOfItems: const ["Pinning", "Block", "Zoning"],
               controller: deffenseQualityController,
             ),
           ],
@@ -440,7 +432,7 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
           children: [
             FormDropdown(
               title: "Climbing speed?",
-              listOfItems: ["Slow", "Fast", "Average"],
+              listOfItems: const ["Slow", "Fast", "Average"],
               controller: climbingSpeedController,
             ),
             FormDropdown(
@@ -466,12 +458,12 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
           children: [
             FormDropdown(
               title: "Agility?",
-              listOfItems: ["Slow", "Fast", "Average"],
+              listOfItems: const ["Slow", "Fast", "Average"],
               controller: agilityController,
             ),
             FormDropdown(
               title: "Deffense skills?",
-              listOfItems: ["Good", "Bad", "Excellent"],
+              listOfItems: const ["Good", "Bad", "Excellent"],
               controller: deffenseSkillsController,
             ),
           ],
@@ -491,7 +483,7 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
         ),
         FormDropdown(
           title: "HP skills?",
-          listOfItems: ["Aware", "Unaware"],
+          listOfItems: const ["Aware", "Unaware"],
           controller: hpSkillsController,
         ),
         const SizedBox(
@@ -669,12 +661,12 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
         ),
         FormDropdown(
           title: "Match type",
-          listOfItems: ["Qualis", "Practice", "Playoffs"],
+          listOfItems: const ["Qualis", "Practice", "Playoffs"],
           controller: matchTypeController,
         ),
         FormDropdown(
           title: "Color of their alliance",
-          listOfItems: ["Blue", "Red"],
+          listOfItems: const ["Blue", "Red"],
           controller: allianceColorController,
         ),
         const SizedBox(
@@ -722,7 +714,7 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
         ),
         FormDropdown(
           title: "Note scoring accuracy:",
-          listOfItems: ["Perfect", "Average"],
+          listOfItems: const ["Perfect", "Average"],
           controller: autoNoteScoringAccuracyController,
         ),
         FormDropdown(
@@ -758,7 +750,7 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
               width: 150,
               controller: teleopSpeakerNotesController,
             ),
-            SizedBox(
+            const SizedBox(
               width: 20,
             ),
             AppCounter(
@@ -770,12 +762,12 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
         ),
         FormDropdown(
           title: "Speaker scoring accuracy:",
-          listOfItems: ["Perfect", "Average"],
+          listOfItems: const ["Perfect", "Average"],
           controller: teleopSpeakerAccuracyController,
         ),
         FormDropdown(
           title: "Amp scoring accuracy:",
-          listOfItems: ["Perfect", "Average"],
+          listOfItems: const ["Perfect", "Average"],
           controller: teleopAmpAccuracyController,
         ),
         const SizedBox(
@@ -794,7 +786,7 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
               width: 150,
               controller: teleopTimesAmplifiedController,
             ),
-            SizedBox(
+            const SizedBox(
               width: 20,
             ),
             AppCounter(
@@ -818,17 +810,17 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
         ),
         FormDropdown(
           title: "Offense quality?",
-          listOfItems: ["None", "Effective", "Bad"],
+          listOfItems: const ["None", "Effective", "Bad"],
           controller: offenseQualityController,
         ),
         FormDropdown(
           title: "Deffense quality?",
-          listOfItems: ["Pinning", "Block", "Zoning"],
+          listOfItems: const ["Pinning", "Block", "Zoning"],
           controller: deffenseQualityController,
         ),
         FormDropdown(
           title: "Climbing speed?",
-          listOfItems: ["Slow", "Fast", "Average"],
+          listOfItems: const ["Slow", "Fast", "Average"],
           controller: climbingSpeedController,
         ),
         FormDropdown(
@@ -849,12 +841,12 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
         ),
         FormDropdown(
           title: "Agility?",
-          listOfItems: ["Slow", "Fast", "Average"],
+          listOfItems: const ["Slow", "Fast", "Average"],
           controller: agilityController,
         ),
         FormDropdown(
           title: "Deffense skills?",
-          listOfItems: ["Good", "Bad", "Excellent"],
+          listOfItems: const ["Good", "Bad", "Excellent"],
           controller: deffenseSkillsController,
         ),
         FormDropdown(
@@ -867,7 +859,7 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
         ),
         FormDropdown(
           title: "HP skills?",
-          listOfItems: ["Aware", "Unaware"],
+          listOfItems: const ["Aware", "Unaware"],
           controller: hpSkillsController,
         ),
         const SizedBox(
@@ -986,7 +978,7 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
             ),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 15,
         ),
         GestureDetector(
@@ -1031,32 +1023,28 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
 
   void _showMessage(PostState state) {
     final messenger = ScaffoldMessenger.of(context);
-    final title;
-    final message;
-    final contentType;
-    final color;
+    final String title;
+    final String message;
+    final ContentType contentType;
     if (state == PostState.successful) {
       title = 'Nice!';
       message = "The match was posted";
       contentType = ContentType.success;
-      color = Colors.green;
     } else if (state == PostState.isDuplicated) {
       title = "U sure?";
       message = "The match is duplicated";
       contentType = ContentType.warning;
-      color = Colors.amber;
     } else {
       title = 'Shoot!!';
       message = "Something went wrong, try again later or save the QR Code";
       contentType = ContentType.failure;
-      color = Colors.red;
     }
     final snackBar = SnackBar(
         elevation: 0,
         //AppText(text: message, fontSize: 25,),
         content: AwesomeSnackbarContent(
             title: title, message: message, contentType: contentType),
-        duration: Duration(seconds: 4),
+        duration: const Duration(seconds: 4),
         backgroundColor: Colors.transparent);
     messenger.showSnackBar(snackBar);
   }
@@ -1151,11 +1139,11 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
     final rows = [];
 
     // Loop through each value in data
-    data.values.forEach((value) {
+    for (var value in data.values) {
       // Escape any commas in the value for proper CSV format
       final escapedValue = value.toString().replaceAll(',', ' ');
       rows.add('"$escapedValue"');
-    });
+    }
 
     // Combine rows with line breaks
     final csvContent = rows.join('\n');

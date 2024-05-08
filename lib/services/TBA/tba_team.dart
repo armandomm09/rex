@@ -157,9 +157,9 @@ class TBATeamService {
 
       if (response.statusCode == 200) {
         var oprs = jsonDecode(response.body);
-        opr = oprs["oprs"]["frc${teamNumber}"];
-        dpr = oprs["dprs"]["frc${teamNumber}"];
-        ccwm = oprs["ccwms"]["frc${teamNumber}"];
+        opr = oprs["oprs"]["frc$teamNumber"];
+        dpr = oprs["dprs"]["frc$teamNumber"];
+        ccwm = oprs["ccwms"]["frc$teamNumber"];
         
         
       return {
@@ -182,32 +182,21 @@ class TBATeamService {
       double matchCounter = 1;
     print("getting plotpoits");
     double generalNoteCount = 0;
-    double totalPointsCounter = 0;
   try{
     for (var i = 0; i < extendedMatches.length; i++) {
       var alliances = extendedMatches[i]["alliances"];
-      var matchNumber = extendedMatches[i]["match_number"];
-      var matchKey = extendedMatches[i]["key"];
       if(extendedMatches[i]["score_breakdown"] != null){
       var isRedAlliance = alliances["red"]["team_keys"].toString().contains(team);
       var noteCount =
           (isRedAlliance
               ? extendedMatches[i]["score_breakdown"]["red"]["teleopPoints"]
               : extendedMatches[i]["score_breakdown"]["blue"]["teleopPoints"]);
-      var totalPoints = isRedAlliance 
-              ? extendedMatches[i]["score_breakdown"]["red"]["teleopPoints"]
-              : extendedMatches[i]["score_breakdown"]["blue"]["teleopPoints"];
 
-      //if (matchKey.toString().contains("qm")) {
         generalNoteCount += noteCount;
-        totalPointsCounter += totalPoints;
         matchCounter += 1;
-      /*print(matchNumber.toString() + " Is red alliance?: " + 
-      alliances["red"]["team_keys"].toString().contains(team).toString() + 
-      ", notes: " + noteCount.toString());*/
+     
       }
     }
-   // print(totalPointsCounter / matchCounter );
     return recortarDecimales(generalNoteCount / matchCounter  , 3);}
     catch(e){
       print("mala lista");
@@ -219,7 +208,6 @@ class TBATeamService {
       double matchCounter = 1;
     print("getting plotpoits");
     double generalNoteCount = 0;
-    double totalPointsCounter = 0;
   try{
     for (var i = 0; i < extendedMatches.length; i++) {
       var alliances = extendedMatches[i]["alliances"];
@@ -254,8 +242,6 @@ class TBATeamService {
   try{
     for (var i = 0; i < extendedMatches.length; i++) {
       var alliances = extendedMatches[i]["alliances"];
-      var matchNumber = extendedMatches[i]["match_number"];
-      var matchKey = extendedMatches[i]["key"];
       if(extendedMatches[i]["score_breakdown"] != null){
       var isRedAlliance = alliances["red"]["team_keys"].toString().contains(team);
       var noteCount =

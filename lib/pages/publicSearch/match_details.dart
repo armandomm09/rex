@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:chat_app/components/generals/app_text.dart';
 import 'package:chat_app/components/generals/liquid_pull_to_Refresh.dart';
-import 'package:chat_app/components/materialApp/app_drawer.dart';
 import 'package:chat_app/components/tiles/data_tile.dart';
 import 'package:chat_app/services/TBA/tba_match.dart';
 import 'package:chat_app/services/statbotics/statbotics_match.dart';
@@ -92,7 +91,7 @@ class _MatchDetailsState extends State<MatchDetails>
       var newMatchNumber = widget.matchKey.toString().substring(widget.matchKey.toString().length - 1);
       matchNumber = newMatchNumber;//.substring(0, newMatchNumber.length - 2);
     }
-    print(matchNumber + 'oo');
+    print('${matchNumber}oo');
     });
 
 
@@ -126,7 +125,7 @@ class _MatchDetailsState extends State<MatchDetails>
           toolbarHeight: 70,
           foregroundColor: Theme.of(context).colorScheme.primary,
           title: Text(
-            matchType+ ' ' + matchNumber,
+            '$matchType $matchNumber',
             style: TextStyle(
                 color: Theme.of(context).colorScheme.inversePrimary,
                 fontSize: 28,

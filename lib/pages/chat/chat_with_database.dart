@@ -1,15 +1,11 @@
 import 'package:chat_app/components/chat/chat_bubble.dart';
-import 'package:chat_app/components/chat/typing_indicator.dart';
 import 'package:chat_app/components/forms/app_text_field.dart';
 import 'package:chat_app/components/generals/app_text.dart';
 import 'package:chat_app/components/materialApp/app_drawer.dart';
 import 'package:chat_app/services/auth/auth_service.dart';
 import 'package:chat_app/services/openai/scout_gpt.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:provider/provider.dart';
 
 class ChatWithDatabase extends StatefulWidget {
   const ChatWithDatabase({super.key});

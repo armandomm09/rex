@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 
 class TypingIndicator extends StatefulWidget {
   const TypingIndicator({
-    Key? key,
+    super.key,
     this.showIndicator = false,
     this.bubbleColor = const Color.fromARGB(255, 121, 124, 131),
     this.flashingCircleDarkColor = const Color.fromARGB(255, 238, 39, 55) ,
     this.flashingCircleBrightColor = const Color.fromARGB(255, 153, 51, 51),
-  }) : super(key: key);
+  });
 
   final bool showIndicator;
   final Color bubbleColor;

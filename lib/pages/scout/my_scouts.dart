@@ -5,7 +5,6 @@ import 'package:chat_app/components/tiles/team_tile.dart';
 import 'package:chat_app/pages/scout/my_scouted_team.dart';
 import 'package:chat_app/pages/scout/search_page.dart';
 import 'package:chat_app/services/firebase/scout_service.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -92,7 +91,7 @@ class _MyScoutsPageState extends State<MyScoutsPage> {
           if (index < teamNames.length && index < teamNumbers.length) {
             return Slidable(
               startActionPane: ActionPane(
-                motion: ScrollMotion(), 
+                motion: const ScrollMotion(), 
                 children: [
                  SlidableAction(
                     onPressed: (value) {},
@@ -110,7 +109,7 @@ class _MyScoutsPageState extends State<MyScoutsPage> {
                     ),
                 ]),
                 endActionPane: ActionPane(
-                motion: ScrollMotion(), 
+                motion: const ScrollMotion(), 
                 children: [
                     SlidableAction(
                     onPressed: (value) {},
@@ -133,7 +132,7 @@ class _MyScoutsPageState extends State<MyScoutsPage> {
           }
         },
         separatorBuilder: (context, index) {
-          return SizedBox(height: 20);
+          return const SizedBox(height: 20);
         },
         itemCount: teamNames.length < teamNumbers.length
             ? teamNames.length
@@ -146,7 +145,7 @@ class _MyScoutsPageState extends State<MyScoutsPage> {
     return Center(
       child: Stack(children: [
         Container(
-          padding: EdgeInsets.only(left: 0, bottom: 20),
+          padding: const EdgeInsets.only(left: 0, bottom: 20),
           child: Image.asset(
             "assets/images/5887_trans.png", 
             height:50,
@@ -155,7 +154,7 @@ class _MyScoutsPageState extends State<MyScoutsPage> {
             ),
         ),
         Container(
-          padding: EdgeInsets.only(top: 8),
+          padding: const EdgeInsets.only(top: 8),
           child: CircularProgressIndicator(strokeWidth: 5, strokeAlign: 9, color: Theme.of(context).colorScheme.inversePrimary,))
       ],),
     );
@@ -167,11 +166,11 @@ class _MyScoutsPageState extends State<MyScoutsPage> {
     return Scaffold(
         floatingActionButton: FloatingActionButton(
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          child: Icon(Icons.add, color: Theme.of(context).colorScheme.background, size: 40,),
+          child: Icon(Icons.add, color: Theme.of(context).colorScheme.surface, size: 40,),
           onPressed: () {
             Navigator.push(context,  
             PageRouteBuilder(
-              pageBuilder: (context, animation, secondaryAnimation) => NewMatchScouting(),
+              pageBuilder: (context, animation, secondaryAnimation) => const NewMatchScouting(),
               transitionsBuilder: (context, animation, secondaryAnimation, child){
               return FadeTransition(opacity: animation, child: child);
               }),
@@ -190,8 +189,8 @@ class _MyScoutsPageState extends State<MyScoutsPage> {
                   fontWeight: FontWeight.bold,
                   fontStyle: FontStyle.italic),
             )),
-        drawer: AppDrawer(),
-        body: teamNames.isNotEmpty ? getBuild() : AppCircularProgress()
+        drawer: const AppDrawer(),
+        body: teamNames.isNotEmpty ? getBuild() : const AppCircularProgress()
         );
   }
 }

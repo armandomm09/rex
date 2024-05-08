@@ -8,7 +8,7 @@ class AppCircularProgress extends StatelessWidget {
     return Center(
       child: Stack(children: [
         Container(
-          padding: EdgeInsets.only(left: 0, bottom: 20),
+          padding: const EdgeInsets.only(left: 0, bottom: 20),
           child: Image.asset(
             "assets/images/5887_trans.png", 
             height:50,
@@ -17,7 +17,7 @@ class AppCircularProgress extends StatelessWidget {
             ),
         ),
         Container(
-          padding: EdgeInsets.only(top: 8),
+          padding: const EdgeInsets.only(top: 8),
           child: CircularProgressIndicator(strokeWidth: 5, strokeAlign: 9, color: Theme.of(context).colorScheme.inversePrimary,))
       ],),
     );

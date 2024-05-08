@@ -1,15 +1,10 @@
-import 'dart:async';
-import 'dart:convert';
 
 import 'package:chat_app/components/generals/app_text.dart';
 import 'package:chat_app/components/generals/liquid_pull_to_Refresh.dart';
-import 'package:chat_app/components/visualization/line_chart.dart';
 import 'package:chat_app/components/tiles/match_tile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as httpp;
 
 class MyScoutedTeam extends StatefulWidget {
   final String teamNickname;
@@ -94,7 +89,7 @@ class _MyScoutedTeamState extends State<MyScoutedTeam> {
                 return MatchTile(matchNumber: "Match ${scoutedMatches[index]["match"]}", matchType: scoutedMatches[index]["matchType"]);
               }, 
               separatorBuilder: (context, index) {
-                return SizedBox(height: 10,);
+                return const SizedBox(height: 10,);
               }, itemCount: scoutedMatches.length),
           ),
         )

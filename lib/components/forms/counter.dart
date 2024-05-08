@@ -15,7 +15,7 @@ class _AppCounterState extends State<AppCounter> {
   int counter = 0;
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: widget.width,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -25,7 +25,7 @@ class _AppCounterState extends State<AppCounter> {
             //height: 80,
             width: 200,
             //padding: EdgeInsets.symmetric(),
-            margin: EdgeInsets.all(0),
+            margin: const EdgeInsets.all(0),
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(50), color: Theme.of(context).colorScheme.inversePrimary),
                         //height: 100,
                         child: Row(
@@ -40,15 +40,15 @@ class _AppCounterState extends State<AppCounter> {
 
                                 }
                               });
-                              }, child: AppText(text: "-", textColor: TextColor.gray, fontSize: 60,)),
+                              }, child: const AppText(text: "-", textColor: TextColor.gray, fontSize: 60,)),
                           Container(
-                            padding: EdgeInsets.symmetric(horizontal: 10),
-                            margin: EdgeInsets.symmetric(horizontal: 10),
-                            child: AppText(text: counter.toString(), fontSize: 35,),
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            margin: const EdgeInsets.symmetric(horizontal: 10),
                             height: 40,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               color: Theme.of(context).colorScheme.inversePrimary),
+                            child: AppText(text: counter.toString(), fontSize: 35,),
                           ),
                             GestureDetector(onTap: () {
                               setState(() {
@@ -56,7 +56,7 @@ class _AppCounterState extends State<AppCounter> {
                               widget.controller?.text = counter.toString();
                               print(widget.controller?.text);
                               });
-                            }, child: AppText(text: "+", textColor: TextColor.gray, fontSize: 60,)),
+                            }, child: const AppText(text: "+", textColor: TextColor.gray, fontSize: 60,)),
                         
                         ],),
                       ),

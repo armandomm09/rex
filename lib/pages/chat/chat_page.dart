@@ -13,7 +13,7 @@ class ChatPage extends StatefulWidget {
   final String recieverEmail;
   final String recieverID;
 
-  ChatPage({super.key, required this.recieverEmail, required this.recieverID});
+  const ChatPage({super.key, required this.recieverEmail, required this.recieverID});
 
   @override
   State<ChatPage> createState() => _ChatPageState();
@@ -26,7 +26,7 @@ class _ChatPageState extends State<ChatPage> {
 
   final AuthService authService = AuthService();
 
-  late File? _imageFile = null;
+  late File? _imageFile;
   var messageToSend;
   var imagePath;
 
@@ -147,10 +147,10 @@ class _ChatPageState extends State<ChatPage> {
           Expanded(
             child: _imageFile != null
                 ? Container(
-                    padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-                    margin: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
+                    padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+                    margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
                     decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.background,
+                        color: Theme.of(context).colorScheme.surface,
                         borderRadius: BorderRadius.circular(8)),
                     child: Image.asset(imagePath, height: 200,)) //Image.file(_imageFile!, height: 200) // Mostrar la imagen seleccionada si existe
                 : AppTextField(
@@ -158,11 +158,11 @@ class _ChatPageState extends State<ChatPage> {
           ),
           IconButton(
             onPressed: () => _pickImage(ImageSource.camera),
-            icon: Icon(Icons.camera_alt),
+            icon: const Icon(Icons.camera_alt),
           ),
           IconButton(
             onPressed: () => _pickImage(ImageSource.gallery),
-            icon: Icon(Icons.image),
+            icon: const Icon(Icons.image),
           ),
           Container(
               decoration: const BoxDecoration(
