@@ -23,6 +23,7 @@ class FormDropdown extends StatefulWidget {
 }
 
 class _FormDropdownState extends State<FormDropdown> {
+  // ignore: unused_field
   String _selectedValue = ""; // Store the selected value
 
   @override
@@ -30,17 +31,17 @@ class _FormDropdownState extends State<FormDropdown> {
     List<DropdownMenuItem<String>> items = [];
 
     items = widget.listOfItems.map((item) => DropdownMenuItem(
+      value: item,
       child: AppText(
         text: item,
         textColor: TextColor.red,
       ),
-      value: item,
     )).toList();
 
     return Column(
       children: [
-        SizedBox(height: 30),
-        Container(
+        const SizedBox(height: 30),
+        SizedBox(
           width: 200,
           child: AppText(
             text: widget.title,
@@ -48,12 +49,12 @@ class _FormDropdownState extends State<FormDropdown> {
             fontSize: widget.fontSize,
           ),
         ),
-        Container(
+        SizedBox(
           width: 300,
           child: DropdownButtonFormField<String>(
             borderRadius: BorderRadius.circular(8),
             focusColor: Theme.of(context).colorScheme.secondary,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               hintText: "Select value",
             ),
             items: items,
@@ -61,8 +62,8 @@ class _FormDropdownState extends State<FormDropdown> {
             onChanged: (value) {
               setState(() {
                 widget.controller?.text = value.toString();
-                print(widget.title + ": " + value!);
-                _selectedValue = value!; // Update state with selected value
+                print("${widget.title}: ${value!}");
+                _selectedValue = value; // Update state with selected value
               });
               // Call the onSaved callback with the selected value, but only if it's not null
               if (widget.onSaved != null) {

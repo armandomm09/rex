@@ -1,4 +1,3 @@
-import 'package:chat_app/components/generals/app_text.dart';
 import 'package:flutter/material.dart';
 
 class ImperatorTile extends StatelessWidget {

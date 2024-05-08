@@ -53,7 +53,7 @@ return GestureDetector(
         child: Container(
           decoration: BoxDecoration(
             color: eventType == "Championship Division" || eventType == 'Championship Finals'
-                ? Color.fromARGB(255, 229, 185, 11)
+                ? const Color.fromARGB(255, 229, 185, 11)
                 : Theme.of(context).colorScheme.tertiary,
             borderRadius: BorderRadius.circular(12),
           ),
@@ -77,7 +77,7 @@ return GestureDetector(
                     alignment: Alignment.centerLeft,
                     child: Row(
                       children: [
-                        Container(
+                        SizedBox(
                           width: 200,
                           child: AppText(
                             text: eventName,
@@ -92,11 +92,11 @@ return GestureDetector(
                   )
                 ],
               ),
-              Spacer(),
+              const Spacer(),
                         Column(
                           children: [
                             Container(
-                              margin: EdgeInsets.only(bottom: 0),
+                              margin: const EdgeInsets.only(bottom: 0),
                               child: SvgPicture.asset(getEventLocationImage(), height: 50, color: Theme.of(context).colorScheme.inversePrimary,),
                             ),
                             

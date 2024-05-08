@@ -1,23 +1,19 @@
-import 'package:chat_app/components/generals/app_button.dart';
 import 'package:chat_app/components/generals/app_text.dart';
 import 'package:chat_app/components/generals/liquid_pull_to_Refresh.dart';
 import 'package:chat_app/components/tiles/imperator_tile.dart';
 import 'package:chat_app/components/tiles/team_tile.dart';
-import 'package:chat_app/components/tiles/user_tile.dart';
-import 'package:chat_app/pages/chat/chat_page.dart';
 import 'package:chat_app/pages/databaseSearch/scouted_team.dart';
 import 'package:chat_app/services/auth/auth_service.dart';
 import 'package:chat_app/components/materialApp/app_drawer.dart';
 import 'package:chat_app/services/chat/chat_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ScoutsStream extends StatefulWidget {
-  ScoutsStream({super.key});
+  const ScoutsStream({super.key});
 
   @override
   State<ScoutsStream> createState() => _ScoutsStreamState();
@@ -85,7 +81,7 @@ class _ScoutsStreamState extends State<ScoutsStream> {
 
   getTeamsListView() {
     return Container(
-      margin: EdgeInsets.only(top: 20, bottom: 20),
+      margin: const EdgeInsets.only(top: 20, bottom: 20),
       child: AppLiquidPullRefresh(
         onRefresh: () => initStream(),
         child: ListView.separated(
@@ -107,7 +103,7 @@ class _ScoutsStreamState extends State<ScoutsStream> {
             }
           },
           separatorBuilder: (context, index) {
-            return SizedBox(
+            return const SizedBox(
               height: 30,
             );
           },
@@ -123,7 +119,7 @@ class _ScoutsStreamState extends State<ScoutsStream> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            margin: EdgeInsets.all(25),
+            margin: const EdgeInsets.all(25),
             child: const AppText(
               text: "Sorry, the teams are not posted yet",
               textColor: TextColor.red,
@@ -162,7 +158,7 @@ class _ScoutsStreamState extends State<ScoutsStream> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        drawer: AppDrawer(),
+        drawer: const AppDrawer(),
         appBar: AppBar(
           backgroundColor:
               Colors.transparent, //Theme.of(context).colorScheme.primary,

@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:chat_app/components/generals/liquid_pull_to_Refresh.dart';
-import 'package:chat_app/components/materialApp/app_drawer.dart';
 import 'package:chat_app/components/generals/app_text.dart';
 import 'package:chat_app/components/tiles/imperator_tile.dart';
 import 'package:chat_app/components/tiles/team_tile.dart';
@@ -10,7 +9,6 @@ import 'package:chat_app/services/firebase/user_data.dart';
 import 'package:chat_app/util/string_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:http/http.dart' as httpp;
@@ -35,9 +33,7 @@ class _EventDetailsState extends State<EventDetails> {
   getTeamsStream() async {
     var apiKey =
         "WFoNaSbMFws9MIaRrXrSTbglBWpv60ZUZi96Pmg4XFzPY828s5DT5NATHORA2OUs";
-    var url = "https://www.thebluealliance.com/api/v3/event/" +
-        widget.eventCode +
-        "/teams";
+    var url = "https://www.thebluealliance.com/api/v3/event/${widget.eventCode}/teams";
     try {
       final response = await httpp.get(
         Uri.parse(url),
@@ -84,7 +80,7 @@ class _EventDetailsState extends State<EventDetails> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            margin: EdgeInsets.all(25),
+            margin: const EdgeInsets.all(25),
             child: const AppText(
               text: "Sorry, the teams are not posted yet",
               textColor: TextColor.red,
@@ -114,7 +110,7 @@ class _EventDetailsState extends State<EventDetails> {
     return AppLiquidPullRefresh(
       onRefresh: () => getTeamsStream(),
       child: Container(
-        margin: EdgeInsets.only(top: 20, bottom: 20),
+        margin: const EdgeInsets.only(top: 20, bottom: 20),
         child: ListView.separated(
           itemBuilder: (context, index) {
             var teamNickname = filteredTeams[index]['nickname'];
@@ -123,7 +119,7 @@ class _EventDetailsState extends State<EventDetails> {
             if (teamNickname.toString().toLowerCase().contains("imperator")) {
               return Slidable(
                 startActionPane: ActionPane(
-                motion: ScrollMotion(), 
+                motion: const ScrollMotion(), 
                 children: [
                  
                     SlidableAction(
@@ -145,7 +141,7 @@ class _EventDetailsState extends State<EventDetails> {
             } else {
               return Slidable(
                 startActionPane: ActionPane(
-                motion: ScrollMotion(), 
+                motion: const ScrollMotion(), 
                 children: [
                  
                     SlidableAction(
@@ -167,7 +163,7 @@ class _EventDetailsState extends State<EventDetails> {
             }
           },
           separatorBuilder: (context, index) {
-            return SizedBox(
+            return const SizedBox(
               height: 30,
             );
           },
@@ -211,7 +207,7 @@ void dispose() {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
+                    SizedBox(
                       width: 225,
                       child: AppText(
                         text: widget.eventName,
@@ -228,7 +224,7 @@ void dispose() {
                 ),
                 CupertinoSearchTextField(
                   // decoration: BoxDecoration(color: Theme.of(context).colorScheme.inversePrimary),
-                  itemColor: Theme.of(context).colorScheme.background,
+                  itemColor: Theme.of(context).colorScheme.surface,
                   style: TextStyle(
                       color: Theme.of(context).colorScheme.inversePrimary,
                       fontSize: 16,

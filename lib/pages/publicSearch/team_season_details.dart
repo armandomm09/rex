@@ -3,13 +3,9 @@ import 'dart:math';
 import 'package:chat_app/components/generals/app_circular_progress.dart';
 import 'package:chat_app/components/generals/app_text.dart';
 import 'package:chat_app/components/generals/liquid_pull_to_Refresh.dart';
-import 'package:chat_app/components/materialApp/app_drawer.dart';
-import 'package:chat_app/components/tiles/event_tile.dart';
 import 'package:chat_app/components/tiles/teams_event_tile.dart';
 import 'package:chat_app/services/TBA/tba_team.dart';
 import 'package:chat_app/services/statbotics/statbotics_team.dart';
-import 'package:chat_app/util/string_util.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
@@ -128,10 +124,10 @@ class _TeamSeasonDetailsState extends State<TeamSeasonDetails>
               Container(
                   child: Center(
                       child: AppLiquidPullRefresh(
-                          child: isLoading ? AppCircularProgress() : getDetailsView(),
+                          child: isLoading ? const AppCircularProgress() : getDetailsView(),
                           onRefresh: () async {}))),
               Container(
-                child:  Center(child: isLoading ? AppCircularProgress() : getEventsStream(),),
+                child:  Center(child: isLoading ? const AppCircularProgress() : getEventsStream(),),
               ),
             ]),
           )
@@ -160,7 +156,7 @@ class _TeamSeasonDetailsState extends State<TeamSeasonDetails>
               
                   return Column(
                     children: [
-                      SizedBox(height: 20,),
+                      const SizedBox(height: 20,),
                       TeamsEventTile(
                         eventName: eventName,
                         eventLocation: eventLocation,
@@ -171,7 +167,7 @@ class _TeamSeasonDetailsState extends State<TeamSeasonDetails>
                   );
                 },
                 separatorBuilder: (context, index) {
-                  return SizedBox(
+                  return const SizedBox(
                     height: 10,
                   );
                 },
@@ -188,7 +184,7 @@ class _TeamSeasonDetailsState extends State<TeamSeasonDetails>
                                 height: 90,
                               ),
 
-                      SizedBox(height: 20,),
+                      const SizedBox(height: 20,),
                               
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -323,7 +319,7 @@ class _TeamSeasonDetailsState extends State<TeamSeasonDetails>
                               ),
                             ],
                           ),
-                          SizedBox(height: 10,),
+                          const SizedBox(height: 10,),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [

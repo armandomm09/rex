@@ -1,5 +1,3 @@
-import 'package:chat_app/models/gpt_message.dart';
-import 'package:chat_app/models/match_scout.dart';
 import 'package:chat_app/services/firebase/scout_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -60,16 +58,16 @@ class UserData {
 
   getFavoriteTeams() async {
     final String currentUserID = auth.currentUser!.uid;
-    List favorite_teams = [
+    List favoriteTeams = [
       {
         "names": [],
         "numbers": [],
         "ids": []
       }
     ];
-    List favorite_teamsNames = favorite_teams[0]["names"];
-    List favorite_teamsNumbers = favorite_teams[0]["numbers"];
-    List favorite_teamsIDS = favorite_teams[0]["ids"];
+    List favoriteTeamsnames = favoriteTeams[0]["names"];
+    List favoriteTeamsnumbers = favoriteTeams[0]["numbers"];
+    List favoriteTeamsids = favoriteTeams[0]["ids"];
 
     try {
       final querySnapshot = await firestore
@@ -82,14 +80,14 @@ class UserData {
         final teamNumber = doc.get("teamNumber");
         final teamName = doc.get("teamName");
 
-        favorite_teamsNumbers.add(teamNumber);
-        favorite_teamsNames.add(teamName);
-        favorite_teamsIDS.add(doc.id);
+        favoriteTeamsnumbers.add(teamNumber);
+        favoriteTeamsnames.add(teamName);
+        favoriteTeamsids.add(doc.id);
       }
       //print(favorite_teamsNumbers);
       //print(favorite_teamsNames);
       //print(favorite_teams[0]["names"][0]);
-      return favorite_teams;
+      return favoriteTeams;
     } catch (e) {
       return [];
     }

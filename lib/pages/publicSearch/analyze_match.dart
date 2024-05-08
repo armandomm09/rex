@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:chat_app/components/generals/app_button.dart';
 import 'package:chat_app/components/generals/liquid_pull_to_Refresh.dart';
 import 'package:chat_app/components/materialApp/app_drawer.dart';
 import 'package:chat_app/components/generals/app_text.dart';
@@ -8,9 +7,7 @@ import 'package:chat_app/components/tiles/event_tile.dart';
 import 'package:chat_app/pages/publicSearch/event_details.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:http/http.dart' as httpp;
-import 'package:liquid_pull_refresh/liquid_pull_refresh.dart';
 
 class SearchRegionals extends StatefulWidget {
   const SearchRegionals({super.key});
@@ -30,7 +27,7 @@ class _SearchRegionalsState extends State<SearchRegionals> {
   getEventsStream(String year) async {
   var apiKey =
       "WFoNaSbMFws9MIaRrXrSTbglBWpv60ZUZi96Pmg4XFzPY828s5DT5NATHORA2OUs";
-  var url = "https://www.thebluealliance.com/api/v3/events/" + year;
+  var url = "https://www.thebluealliance.com/api/v3/events/$year";
 
   try {
     final response = await httpp.get(
@@ -97,7 +94,7 @@ class _SearchRegionalsState extends State<SearchRegionals> {
   @override
   void initState() {
     for(var i = 2024; i >= 1994; i--){
-      allYears.add(PopupMenuItem(child: AppText(text: i.toString(), textColor: TextColor.red,), value: i,));
+      allYears.add(PopupMenuItem(value: i,child: AppText(text: i.toString(), textColor: TextColor.red,),));
     }
     searchController.addListener(searchResultList);
     // TODO: implement initState
@@ -115,7 +112,7 @@ class _SearchRegionalsState extends State<SearchRegionals> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        drawer: AppDrawer(),
+        drawer: const AppDrawer(),
         appBar: AppBar(
             elevation: 50,
             toolbarHeight: 100,
@@ -125,7 +122,7 @@ class _SearchRegionalsState extends State<SearchRegionals> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                     AppText(
+                     const AppText(
                         text: "Regionals",
                         textColor: TextColor.red,
                         fontSize: 28,
@@ -146,7 +143,7 @@ class _SearchRegionalsState extends State<SearchRegionals> {
                 ),
                 CupertinoSearchTextField(
                   // decoration: BoxDecoration(color: Theme.of(context).colorScheme.inversePrimary),
-                  itemColor: Theme.of(context).colorScheme.background,
+                  itemColor: Theme.of(context).colorScheme.surface,
                   style: TextStyle(
                       color: Theme.of(context).colorScheme.inversePrimary,
                       fontSize: 16,
@@ -158,7 +155,7 @@ class _SearchRegionalsState extends State<SearchRegionals> {
               ],
             )),
         body: Container(
-          margin: EdgeInsets.only(top: 20),
+          margin: const EdgeInsets.only(top: 20),
           child: AppLiquidPullRefresh(
             onRefresh: () =>getEventsStream("2024"),
             child: ListView.separated(
@@ -199,7 +196,7 @@ class _SearchRegionalsState extends State<SearchRegionals> {
                 );
               },
               separatorBuilder: (context, index) {
-                return SizedBox(
+                return const SizedBox(
                   height: 30,
                 );
               },

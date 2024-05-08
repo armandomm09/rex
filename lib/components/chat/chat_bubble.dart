@@ -12,10 +12,10 @@ class ChatBubble extends StatelessWidget {
         const EdgeInsets.only(right: 20, top: 5, bottom: 5, left: 75) :
         const EdgeInsets.only(right: 75, top: 5, bottom: 5, left: 20);
     if(message == '-LOADING-'){
-      return Container(
+      return const SizedBox(
         height: 60,
         width: 100,
-        child: const Row(
+        child: Row(
           children: [
             TypingIndicator(
               showIndicator: true,

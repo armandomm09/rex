@@ -10,7 +10,7 @@ class AppLiquidPullRefresh extends StatelessWidget {
   Widget build(BuildContext context) {
     return LiquidPullRefresh(
             color: Theme.of(context).colorScheme.inversePrimary,
-            backgroundColor: Theme.of(context).colorScheme.background,
+            backgroundColor: Theme.of(context).colorScheme.surface,
             height: 300,
             animSpeedFactor: 2,
             showChildOpacityTransition: false,

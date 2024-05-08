@@ -1,6 +1,5 @@
 import 'package:chat_app/components/generals/liquid_pull_to_Refresh.dart';
 import 'package:chat_app/components/materialApp/app_drawer.dart';
-import 'package:chat_app/components/generals/app_text.dart';
 import 'package:chat_app/components/visualization/post_item.dart';
 import 'package:flutter/material.dart';
 
@@ -40,7 +39,7 @@ class RobotListView extends StatelessWidget {
                 return PostItem(user: users[index]);
               },
               separatorBuilder: (context, index) {
-                return Column(
+                return const Column(
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,

@@ -2,7 +2,6 @@ import 'package:chat_app/services/auth/auth_service.dart';
 import 'package:chat_app/components/generals/app_button.dart';
 import 'package:chat_app/components/forms/app_text_field.dart';
 import 'package:flutter/material.dart';
-import 'package:model_viewer_plus/model_viewer_plus.dart';
 
 // ignore: must_be_immutable
 class RegisterPage extends StatelessWidget {
@@ -44,7 +43,7 @@ class RegisterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: Center(
         child: SingleChildScrollView(
           child: Column(
@@ -53,7 +52,7 @@ class RegisterPage extends StatelessWidget {
               const SizedBox(
                 height: 30,
               ),
-              Container(
+              const SizedBox(
                 height: 300,
                 width: 300,
                 child: Center()

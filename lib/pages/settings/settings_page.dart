@@ -20,13 +20,13 @@ class SelectedRegionalProvider extends ChangeNotifier {
 }
 
 class SettingsPage extends StatelessWidget {
-  const SettingsPage({Key? key}) : super(key: key);
+  const SettingsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => SelectedRegionalProvider(),
-      child: _SettingsPage(),
+      child: const _SettingsPage(),
     );
   }
 }
@@ -99,8 +99,7 @@ class __SettingsPageState extends State<_SettingsPage> {
 
   @override
   Widget build(BuildContext context) {
-    var selectedRegionalProvider =
-        Provider.of<SelectedRegionalProvider>(context, listen: false);
+    Provider.of<SelectedRegionalProvider>(context, listen: false);
 
     return Scaffold(
         drawer: const AppDrawer(),
@@ -119,7 +118,7 @@ class __SettingsPageState extends State<_SettingsPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Select Regional"),
+                    const Text("Select Regional"),
                     GestureDetector(
                         onTap: () => showCupertinoModalPopup(
                             context: context,
@@ -146,7 +145,7 @@ class __SettingsPageState extends State<_SettingsPage> {
                                 )),
                         child: Text(
                           currentRegional!,
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: Colors.blueAccent,
                               fontSize: 15,
                               fontWeight: FontWeight.bold),

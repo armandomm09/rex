@@ -4,7 +4,6 @@ import 'package:chat_app/firebase_options.dart';
 import 'package:chat_app/styles/theme_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 

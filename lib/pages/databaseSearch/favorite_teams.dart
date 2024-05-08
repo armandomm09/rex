@@ -1,10 +1,7 @@
-import 'package:chat_app/components/generals/app_button.dart';
 import 'package:chat_app/components/generals/app_circular_progress.dart';
 import 'package:chat_app/components/generals/liquid_pull_to_Refresh.dart';
 import 'package:chat_app/components/materialApp/app_drawer.dart';
-import 'package:chat_app/components/generals/app_text.dart';
 import 'package:chat_app/components/tiles/team_tile.dart';
-import 'package:chat_app/components/visualization/post_item.dart';
 import 'package:chat_app/pages/publicSearch/team_season_details.dart';
 import 'package:chat_app/services/firebase/user_data.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +32,7 @@ class _FavoriteTeamsState extends State<FavoriteTeams> {
           var teamName = favorite_teams[0]["names"][index];
           var teamID = favorite_teams[0]["ids"][index];
           return Slidable(
-            startActionPane: ActionPane(motion: ScrollMotion(), children: [
+            startActionPane: ActionPane(motion: const ScrollMotion(), children: [
               SlidableAction(
                 icon: Icons.delete,
                 backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -64,7 +61,7 @@ class _FavoriteTeamsState extends State<FavoriteTeams> {
           );
         },
         separatorBuilder: (context, index) {
-          return SizedBox(
+          return const SizedBox(
             height: 10,
           );
         },
@@ -116,7 +113,7 @@ class _FavoriteTeamsState extends State<FavoriteTeams> {
             initializeData();
           },
           child: favorite_teams == null || favorite_teams.isEmpty
-              ? AppCircularProgress()
+              ? const AppCircularProgress()
               : getTeamsListView(),
         ));
   }

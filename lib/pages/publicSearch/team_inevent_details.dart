@@ -133,12 +133,12 @@ class _TeamInEventDetailsState extends State<TeamInEventDetails>
       onRefresh: () => initializeData(),
       child: SingleChildScrollView(
         child: Center(
-          child: Container(
+          child: SizedBox(
             width: 350,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Container(
@@ -320,9 +320,7 @@ class _TeamInEventDetailsState extends State<TeamInEventDetails>
                                 margin:
                                     const EdgeInsets.symmetric(vertical: 10),
                                 child: AppText(
-                                  text: recortarDecimales(winRate * 100, 0)
-                                          .toString() +
-                                      "%",
+                                  text: "${recortarDecimales(winRate * 100, 0)}%",
                                   fontSize: 30,
                                 ))
                           ]),
@@ -364,7 +362,7 @@ class _TeamInEventDetailsState extends State<TeamInEventDetails>
                 const SizedBox(
                   height: 20,
                 ),
-                Container(
+                SizedBox(
                     height: 400,
                     //width: 350,
                     child: MyLineChart(
@@ -410,7 +408,7 @@ class _TeamInEventDetailsState extends State<TeamInEventDetails>
                 Container(
                     child: Center(
                         child:
-                            isLoading ? AppCircularProgress() : getTeamData())),
+                            isLoading ? const AppCircularProgress() : getTeamData())),
                 Container(
                   child: Center(
                       child: ListView.separated(
@@ -453,7 +451,7 @@ class _TeamInEventDetailsState extends State<TeamInEventDetails>
                               filteredMatches[index]["time"] * 1000));
                     },
                     separatorBuilder: (BuildContext context, int index) {
-                      return SizedBox(
+                      return const SizedBox(
                         height: 10,
                       );
                     },

@@ -1,6 +1,4 @@
-import 'package:chat_app/pages/chat/chat_page.dart';
 import 'package:chat_app/pages/chat/my_chats.dart';
-import 'package:chat_app/pages/user_sign/login_page.dart';
 import 'package:chat_app/pages/scout/search_page.dart';
 import 'package:chat_app/pages/settings/settings_page.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +14,7 @@ class AppRoutes{
 
 
   static  Map<String, WidgetBuilder> map = {
-        homePage:(context) =>  MyChats(),
+        homePage:(context) =>  const MyChats(),
         settingsPage:(context) => const SettingsPage(),
         searchPage:(context) => const NewMatchScouting(),
       };
