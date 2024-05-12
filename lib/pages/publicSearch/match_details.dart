@@ -63,7 +63,8 @@ class _MatchDetailsState extends State<MatchDetails>
           NumUtil.recortarDecimales(TBApredicts['blueNotesScored'], 0);
     });
     } else {
-       setState(() {
+      try {
+         setState(() {
       winning_alliance = TBApredicts['c'] == 'red' ? Alliance.red : Alliance.blue;
 
       winningProb = NumUtil.recortarDecimales(TBApredicts['winningProb'], 3);
@@ -74,6 +75,10 @@ class _MatchDetailsState extends State<MatchDetails>
       blueNotesScored =
           NumUtil.recortarDecimales(TBApredicts['blueNotesScored'], 1);
     });
+      } catch (e) {
+        
+      }
+      
     }
 
     setState(() {

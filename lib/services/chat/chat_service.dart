@@ -35,10 +35,10 @@ class ChatService {
       Reference referenceDir = referenceRoot.child("images");
       Reference referenceImageToUpload = referenceDir.child(uniqueFileName);
 
-      referenceImageToUpload.putFile(imageFile);
-      
-      print(referenceImageToUpload.getDownloadURL());
-      return referenceImageToUpload.getDownloadURL();
+      await referenceImageToUpload.putFile(imageFile);
+      String downloadURL = await referenceImageToUpload.getDownloadURL();
+      print(downloadURL + 'DOS');
+      return downloadURL;
     } catch (e) {
       print('Error uploading image: $e');
       rethrow; // Reenvía el error para manejarlo en otro lugar si es necesario

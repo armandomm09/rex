@@ -58,7 +58,7 @@ dependencies:
   liquid_pull_to_refresh: ^3.0.1
   liquid_pull_refresh: ^1.0.6
   flutter_slidable: ^3.1.0
-  intl: ^0.19.0
+  intl: ^0.18.1
   percent_indicator: ^4.2.3
   model_viewer_plus: ^1.7.2
   url_launcher: ^6.2.6
@@ -96,6 +96,8 @@ flutter:
     - assets/images/stl/5887_3D.gltf
     - assets/images/svgs/FIRSTicon_CMYK_withTM.svg
     - assets/images/svgs/twitch-icon.svg
+    - assets/images/svgs/sad-emoji-svgrepo-com.svg
+    - assets/images/chat_background.png
 #    - assets/USA-Silhouette.svg
   uses-material-design: true
   fonts:

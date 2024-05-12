@@ -36,7 +36,7 @@ class _SearchRegionalsState extends State<SearchRegionals> {
     );
 
     if (response.statusCode == 200) {
-      final allEvents = jsonDecode(response.body) as List<dynamic>;
+      allEvents = jsonDecode(response.body) as List<dynamic>;
 
       // Prioritize Championship events (combine conditions for efficiency)
       final prioritizedEvents = allEvents.where((event) =>
@@ -49,6 +49,7 @@ class _SearchRegionalsState extends State<SearchRegionals> {
           event['event_type_string'] != "Championship Finals").toList());
 
       setState(() {
+        allEvents = prioritizedEvents;
         filteredEvents = prioritizedEvents;
       });
    
@@ -63,18 +64,22 @@ class _SearchRegionalsState extends State<SearchRegionals> {
 
   searchResultList() {
     var shownResults = [];
-    if(searchController.text != ""){
+      print('other: $searchController.text');
+
+    if(searchController.text.toString() != ""){
       for(var event in allEvents){
         var name = event['name'].toString().toLowerCase();
         var city = event['city'].toString().toLowerCase();
         var country = event['country'].toString().toLowerCase();
-        
         if(name.contains(searchController.text.toLowerCase()) || city.contains(searchController.text.toLowerCase()) || country.contains(searchController.text.toLowerCase())){
+          print(name);
           shownResults.add(event);
         }
       }
     } else {
-      shownResults = List.from(allEvents);
+      print('empty');
+      shownResults = allEvents;
+      print(shownResults.isEmpty);
     }
 
     setState(() {

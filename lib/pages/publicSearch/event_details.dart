@@ -88,7 +88,7 @@ class _EventDetailsState extends State<EventDetails> {
             ),
           ),
           SvgPicture.asset(
-            "/Users/Armando09/DART/chat_app/assets/images/svgs/sad-emoji-svgrepo-com.svg",
+            "assets/images/svgs/sad-emoji-svgrepo-com.svg",
             color: Theme.of(context).colorScheme.inversePrimary,
           )
         ],

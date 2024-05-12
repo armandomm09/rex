@@ -3,7 +3,7 @@ import 'package:chat_app/components/generals/liquid_pull_to_Refresh.dart';
 import 'package:chat_app/components/materialApp/app_drawer.dart';
 import 'package:chat_app/components/tiles/team_tile.dart';
 import 'package:chat_app/pages/scout/my_scouted_team.dart';
-import 'package:chat_app/pages/scout/search_page.dart';
+import 'package:chat_app/pages/scout/match_scout.dart';
 import 'package:chat_app/services/firebase/scout_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
