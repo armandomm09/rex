@@ -1,5 +1,5 @@
 import 'package:chat_app/pages/chat/my_chats.dart';
-import 'package:chat_app/pages/scout/search_page.dart';
+import 'package:chat_app/pages/scout/match_scout.dart';
 import 'package:chat_app/pages/settings/settings_page.dart';
 import 'package:flutter/material.dart';
 

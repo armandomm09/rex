@@ -1,6 +1,8 @@
 import 'dart:convert';
+import 'dart:ui';
 
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+import 'package:chat_app/components/generals/liquid_pull_to_Refresh.dart';
 import 'package:chat_app/components/materialApp/app_drawer.dart';
 import 'package:chat_app/components/generals/app_text.dart';
 import 'package:chat_app/components/forms/app_text_field.dart';
@@ -157,11 +159,13 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
         ),
       ),
       drawer: const AppDrawer(),
+      extendBodyBehindAppBar: true,
       //backgroundColor: Colors.transparent,
       appBar: AppBar(
-          elevation: 50,
+        backgroundColor: Colors.transparent,
+          elevation: 0,
           toolbarHeight: 70,
-          foregroundColor: Theme.of(context).colorScheme.primary,
+          //foregroundColor: Theme.of(context).colorScheme.primary,
           title: Text(
             teamTitle,
             style: TextStyle(
@@ -171,21 +175,44 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
                 fontWeight: FontWeight.bold,
                 fontStyle: FontStyle.italic),
           )),
-      body: SingleChildScrollView(
-        controller: scrollController,
-        child: Center(
-          child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 10),
-              width: MediaQuery.of(context).size.width,
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  if (constraints.maxWidth > 600) {
-                    return buildHorizontalLayout();
-                  } else {
-                    return buildVerticalLayout();
-                  }
-                },
-              )),
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            fit: BoxFit.cover,
+            image: AssetImage('assets/images/chat_background.png'))
+        ),
+        child: AppLiquidPullRefresh(
+          backgroundColor: Color.fromARGB(140, 0, 0, 0),
+          color: Color.fromARGB(116, 135, 10, 10),
+          onRefresh: () async {},
+          child: SingleChildScrollView(
+            controller: scrollController,
+            child: Stack(
+              children: [
+                Positioned.fill(
+                    child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                  child: Container(
+                    color: Color.fromARGB(213, 0, 0, 0),
+                  ),
+                )),
+                Center(
+                  child: Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 10),
+                      width: MediaQuery.of(context).size.width,
+                      child: LayoutBuilder(
+                        builder: (context, constraints) {
+                          if (constraints.maxWidth > 600) {
+                            return buildHorizontalLayout();
+                          } else {
+                            return buildVerticalLayout();
+                          }
+                        },
+                      )),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
@@ -621,7 +648,7 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
     return Column(
       children: [
         const SizedBox(
-          height: 40,
+          height: 130,
         ),
         const AppText(
           text: "MATCH INFO",

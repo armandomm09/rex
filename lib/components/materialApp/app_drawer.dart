@@ -3,7 +3,7 @@ import 'package:chat_app/pages/databaseSearch/favorite_teams.dart';
 import 'package:chat_app/pages/home_page.dart';
 import 'package:chat_app/pages/publicSearch/analyze_match.dart';
 import 'package:chat_app/pages/chat/my_chats.dart';
-import 'package:chat_app/pages/scout/search_page.dart';
+import 'package:chat_app/pages/scout/match_scout.dart';
 import 'package:chat_app/services/auth/auth_service.dart';
 import 'package:chat_app/pages/settings/settings_page.dart';
 import 'package:chat_app/services/auth/authgate.dart';
@@ -22,7 +22,7 @@ class AppDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: Theme.of(context).colorScheme.surface,
+      backgroundColor: Color.fromARGB(206, 7, 7, 7),//Theme.of(context).colorScheme.surface,
       child:  Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -38,6 +38,7 @@ class AppDrawer extends StatelessWidget {
 
                 ),
               ),
+              
               const SizedBox(height: 30,),
               Padding(
                 padding: const EdgeInsets.only(left: 25),
@@ -127,17 +128,7 @@ class AppDrawer extends StatelessWidget {
 
                const SizedBox(height: 12,),
 
-              Padding(
-                padding: const EdgeInsets.only(left: 25),
-                child: ListTile(
-                  title: Text("C H A T  W I T H  D B", style: TextStyle(fontFamily: "Industry", color: Theme.of(context).colorScheme.inversePrimary,)),
-                  leading: Icon(Icons.chat_bubble_outline, color: Theme.of(context).colorScheme.inversePrimary,),
-                  onTap: () {
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>  const ChatWithDatabase()));
-                  },
-                    ),
-              ),
-
+            
               Padding(
                 padding: const EdgeInsets.only(left: 25),
                 child: ListTile(
@@ -149,15 +140,11 @@ class AppDrawer extends StatelessWidget {
                     ),
               ),
 
-               const SizedBox(height: 12,),
-
-           
-              
             ],
           ),
 
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 28),
+            padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 28),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

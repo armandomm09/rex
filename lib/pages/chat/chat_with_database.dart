@@ -132,7 +132,6 @@ class _ChatWithDatabaseState extends State<ChatWithDatabase> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const AppDrawer(),
       appBar: AppBar(
         backgroundColor:
             Colors.transparent, //Theme.of(context).colorScheme.primary,
