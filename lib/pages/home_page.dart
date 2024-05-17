@@ -38,22 +38,24 @@ class HomePage extends StatelessWidget {
                         height: MediaQuery.of(context).size.height * 0.125,
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 0.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset("assets/images/futureB.png", height: 150,)
-                          /*AppText(text: "WIRING THE", fontSize: 65),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 20),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset(
+                                "assets/images/futureB.png",
+                                height: 150,
+                              )
+                              /*AppText(text: "WIRING THE", fontSize: 65),
                           SizedBox(height: 0,),
                           AppText(text: "FUTURE", fontSize: 80,),*/
-
-                        ],)
-                      )
+                            ],
+                          ))
                     ],
                   )),
             ),
           ),
-          
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.all(20),
@@ -72,7 +74,6 @@ class HomePage extends StatelessWidget {
               ),
             ),
           ),
-          
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.all(20),
@@ -131,7 +132,10 @@ class HomePage extends StatelessWidget {
                         ),
                       );
                     },
-                    options: CarouselOptions(height: 100, autoPlay: true, autoPlayInterval: const Duration(seconds: 3)))),
+                    options: CarouselOptions(
+                        height: 100,
+                        autoPlay: true,
+                        autoPlayInterval: const Duration(seconds: 3)))),
           ),
           SliverToBoxAdapter(
             child: Padding(

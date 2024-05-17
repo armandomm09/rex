@@ -162,7 +162,7 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
       extendBodyBehindAppBar: true,
       //backgroundColor: Colors.transparent,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+          backgroundColor: Colors.transparent,
           elevation: 0,
           toolbarHeight: 70,
           //foregroundColor: Theme.of(context).colorScheme.primary,
@@ -177,10 +177,9 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
           )),
       body: Container(
         decoration: BoxDecoration(
-          image: DecorationImage(
-            fit: BoxFit.cover,
-            image: AssetImage('assets/images/chat_background.png'))
-        ),
+            image: DecorationImage(
+                fit: BoxFit.cover,
+                image: AssetImage('assets/images/chat_background.png'))),
         child: AppLiquidPullRefresh(
           backgroundColor: Color.fromARGB(140, 0, 0, 0),
           color: Color.fromARGB(116, 135, 10, 10),
@@ -225,18 +224,19 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
           height: 40,
         ),
         const AppText(
-          text: "MATCH INFO",
-          fontSize: 40,
-          textColor: TextColor.gray,
+          text: "MATCH aNFO",
+          fontSize: 10,
+          textColor: TextColor.base,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Column(
+              mainAxisSize: MainAxisSize.max,
               children: [
                 const AppText(
                   text: "Team number",
-                  textColor: TextColor.red,
+                  textColor: TextColor.base,
                   fontSize: 20,
                 ),
                 const SizedBox(
@@ -252,7 +252,7 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
               children: [
                 const AppText(
                   text: "Match number",
-                  textColor: TextColor.red,
+                  textColor: TextColor.black,
                   fontSize: 20,
                 ),
                 const SizedBox(
