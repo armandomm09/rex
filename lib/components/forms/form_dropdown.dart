@@ -15,8 +15,7 @@ class FormDropdown extends StatefulWidget {
     this.listOfItems = const ["Yes", "No"],
     required this.title,
     this.fontSize = 20,
-    this.onSaved,
-    this.controller,
+    this.onSaved, this.controller,
   });
 
   @override
@@ -31,24 +30,24 @@ class _FormDropdownState extends State<FormDropdown> {
   Widget build(BuildContext context) {
     List<DropdownMenuItem<String>> items = [];
 
-    items = widget.listOfItems
-        .map((item) => DropdownMenuItem(
-              value: item,
-              child: AppText(
-                text: item,
-                textColor: TextColor.red,
-              ),
-            ))
-        .toList();
+    items = widget.listOfItems.map((item) => DropdownMenuItem(
+      value: item,
+      child: AppText(
+        text: item,
+        textColor: TextColor.red,
+      ),
+    )).toList();
 
     return Column(
-      mainAxisSize: MainAxisSize.min,
       children: [
         const SizedBox(height: 30),
-        AppText(
-          text: widget.title,
-          textColor: TextColor.red,
-          fontSize: widget.fontSize,
+        SizedBox(
+          width: 200,
+          child: AppText(
+            text: widget.title,
+            textColor: TextColor.red,
+            fontSize: widget.fontSize,
+          ),
         ),
         SizedBox(
           width: 300,

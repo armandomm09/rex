@@ -56,10 +56,6 @@ class AppText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      overflow: TextOverflow.visible,
-      softWrap: false,
-      textAlign: TextAlign.center,
-      textWidthBasis: TextWidthBasis.parent,
       //selectionHeightStyle: BoxHeightStyle.includeLineSpacingBottom,
       style: TextStyle(
           color: getColor(context),
