@@ -6,15 +6,19 @@ class AppText extends StatelessWidget {
   final String text;
   final TextColor textColor;
   final double fontSize;
-  //final String font;
+
+  //final bool title;
   const AppText({
     super.key,
     required this.text,
     this.textColor = TextColor.black,
     this.fontSize = 18,
+    //required this.title,
+
     //required this.font});
   });
 
+  /*
   getColor(BuildContext context) {
     if (textColor == TextColor.red) {
       return Theme.of(context).colorScheme.inversePrimary;
@@ -30,6 +34,23 @@ class AppText extends StatelessWidget {
       return const Color.fromARGB(255, 255, 255, 255);
     }
   }
+  */
+
+  getColor(BuildContext context) {
+    if (fontSize == 20) {
+      return const Color.fromARGB(255, 255, 255, 255);
+    } else {
+      return Theme.of(context).colorScheme.inversePrimary;
+    }
+  }
+
+  getFont(BuildContext context) {
+    if (fontSize == 20) {
+      return "Inter";
+    } else {
+      return "Industry";
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,10 +58,11 @@ class AppText extends StatelessWidget {
       text,
       //selectionHeightStyle: BoxHeightStyle.includeLineSpacingBottom,
       style: TextStyle(
-        color: getColor(context),
-        fontSize: fontSize,
-        fontFamily: 'Inter',
-      ),
+          color: getColor(context),
+          fontSize: fontSize,
+          fontFamily: getFont(
+            context,
+          )),
     );
   }
 

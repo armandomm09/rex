@@ -660,7 +660,7 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
         ),
         const AppText(
           text: "Team number",
-          textColor: TextColor.red,
+          textColor: TextColor.base,
           fontSize: 20,
         ),
         const SizedBox(
@@ -676,7 +676,7 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
         ),
         const AppText(
           text: "Match number",
-          textColor: TextColor.red,
+          textColor: TextColor.base,
           fontSize: 20,
         ),
         const SizedBox(
@@ -702,7 +702,7 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
         const AppText(
           text: "PRE-MATCH",
           fontSize: 40,
-          textColor: TextColor.gray,
+          textColor: TextColor.base,
         ),
         FormDropdown(
           title: "Did they pre-load a note?",
@@ -767,7 +767,7 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
         const AppText(
           text: "Notes scored on:",
           fontSize: 40,
-          textColor: TextColor.red,
+          textColor: TextColor.base,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
