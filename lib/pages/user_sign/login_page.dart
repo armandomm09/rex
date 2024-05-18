@@ -2,6 +2,7 @@ import 'package:chat_app/services/auth/auth_service.dart';
 import 'package:chat_app/components/generals/app_button.dart';
 import 'package:chat_app/components/forms/app_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:model_viewer_plus/model_viewer_plus.dart';
 
 class LoginPage extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
@@ -45,13 +46,11 @@ class LoginPage extends StatelessWidget {
               const SizedBox(
                 height: 300,
                 width: 300,
-                child:  Center()
-                /*ModelViewer(
-                  autoRotate: true,
-                  rotationPerSecond: "20deg",
-                          backgroundColor: Colors.transparent,
-                          src: "assets/images/stl/5887_3D.gltf"
-                          ),*/
+                child: ModelViewer(
+                    autoRotate: true,
+                    rotationPerSecond: "20deg",
+                    backgroundColor: Colors.transparent,
+                    src: "assets/images/stl/5887_3D.gltf"),
               ),
               //Image.asset("assets/images/5887_trans.png", height: MediaQuery.of(context).size.height * 0.4,),
               const SizedBox(
