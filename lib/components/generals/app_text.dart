@@ -39,8 +39,8 @@ class AppText extends StatelessWidget {
   getColor(BuildContext context) {
     if (fontSize == 20) {
       return const Color.fromARGB(255, 255, 255, 255);
-    } else {
-      return Theme.of(context).colorScheme.inversePrimary;
+    } else if (textColor == TextColor.black) {
+      return const Color.fromARGB(0, 0, 0, 0);
     }
   }
 

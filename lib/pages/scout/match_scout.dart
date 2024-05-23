@@ -373,7 +373,7 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
           children: [
             AppCounter(
               counterTitle: "Speaker",
-              width: 150,
+              //width: 150,
               controller: teleopSpeakerNotesController,
             ),
             const SizedBox(
@@ -381,7 +381,7 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
             ),
             AppCounter(
               counterTitle: "Amp:",
-              width: 150,
+              //width: 150,
               controller: teleopAmpNotesController,
             ),
           ],
@@ -414,7 +414,7 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
           children: [
             AppCounter(
               counterTitle: "Times    amplified",
-              width: 150,
+              //width: 150,
               controller: teleopTimesAmplifiedController,
             ),
             const SizedBox(
@@ -422,7 +422,7 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
             ),
             AppCounter(
               counterTitle: "Speaker while amped:",
-              width: 150,
+              //width: 150,
               controller: teleopSpeakerAmplifiedController,
             ),
           ],
@@ -777,7 +777,7 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
           children: [
             AppCounter(
               counterTitle: "Speaker",
-              width: 150,
+              //width: 150,
               controller: teleopSpeakerNotesController,
             ),
             const SizedBox(
@@ -785,7 +785,7 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
             ),
             AppCounter(
               counterTitle: "Amp:",
-              width: 150,
+              //width: 150,
               controller: teleopAmpNotesController,
             ),
           ],
@@ -813,7 +813,7 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
           children: [
             AppCounter(
               counterTitle: "Times    amplified",
-              width: 150,
+              //width: 150,
               controller: teleopTimesAmplifiedController,
             ),
             const SizedBox(
@@ -821,7 +821,7 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
             ),
             AppCounter(
               counterTitle: "Speaker while amped:",
-              width: 150,
+              //width: 150,
               controller: teleopSpeakerAmplifiedController,
             ),
           ],
