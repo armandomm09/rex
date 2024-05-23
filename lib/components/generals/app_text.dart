@@ -55,6 +55,7 @@ class AppText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
+      softWrap: true,
       text,
       //selectionHeightStyle: BoxHeightStyle.includeLineSpacingBottom,
       style: TextStyle(

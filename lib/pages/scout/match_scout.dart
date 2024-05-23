@@ -646,6 +646,7 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
 
   buildVerticalLayout() {
     return Column(
+      mainAxisSize: MainAxisSize.max,
       children: [
         const SizedBox(
           height: 130,
@@ -686,10 +687,12 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
           hintText: "Search match",
           controller: matchController,
         ),
-        FormDropdown(
-          title: "Match type",
-          listOfItems: const ["Qualis", "Practice", "Playoffs"],
-          controller: matchTypeController,
+        Center(
+          child: FormDropdown(
+            title: 'Match Type ',
+            listOfItems: const ["Qualis", "Practice", "Playoffs"],
+            controller: matchTypeController,
+          ),
         ),
         FormDropdown(
           title: "Color of their alliance",

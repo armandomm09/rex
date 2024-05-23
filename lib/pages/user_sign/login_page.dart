@@ -4,15 +4,22 @@ import 'package:chat_app/components/forms/app_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:model_viewer_plus/model_viewer_plus.dart';
 
-class LoginPage extends StatelessWidget {
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-
+class LoginPage extends StatefulWidget {
   final void Function()? onTap;
 
   LoginPage({super.key, required this.onTap});
 
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final TextEditingController emailController = TextEditingController();
+
+  final TextEditingController passwordController = TextEditingController();
+
   final FocusNode _emailFocus = FocusNode();
+
   final FocusNode _passwordFocus = FocusNode();
 
   void login(BuildContext context) async {
@@ -43,15 +50,13 @@ class LoginPage extends StatelessWidget {
               const SizedBox(
                 height: 30,
               ),
-              const SizedBox(
-                height: 300,
-                width: 300,
-                child: ModelViewer(
+              const SizedBox(height: 300, width: 300, child: Center()
+                  /*ModelViewer(
                     autoRotate: true,
                     rotationPerSecond: "20deg",
                     backgroundColor: Colors.transparent,
-                    src: "assets/images/stl/5887_3D.gltf"),
-              ),
+                    src: "assets/images/stl/5887_3D.gltf"),*/
+                  ),
               //Image.asset("assets/images/5887_trans.png", height: MediaQuery.of(context).size.height * 0.4,),
               const SizedBox(
                 height: 30,
@@ -100,7 +105,7 @@ class LoginPage extends StatelessWidget {
                 children: [
                   const Text("Not a member? "),
                   GestureDetector(
-                    onTap: onTap,
+                    onTap: widget.onTap,
                     child: const Text(
                       "Register now",
                       style: TextStyle(fontWeight: FontWeight.bold),

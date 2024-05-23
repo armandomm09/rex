@@ -15,7 +15,8 @@ class FormDropdown extends StatefulWidget {
     this.listOfItems = const ["Yes", "No"],
     required this.title,
     this.fontSize = 20,
-    this.onSaved, this.controller,
+    this.onSaved,
+    this.controller,
   });
 
   @override
@@ -30,49 +31,56 @@ class _FormDropdownState extends State<FormDropdown> {
   Widget build(BuildContext context) {
     List<DropdownMenuItem<String>> items = [];
 
-    items = widget.listOfItems.map((item) => DropdownMenuItem(
-      value: item,
-      child: AppText(
-        text: item,
-        textColor: TextColor.red,
-      ),
-    )).toList();
+    items = widget.listOfItems
+        .map((item) => DropdownMenuItem(
+              value: item,
+              child: AppText(
+                text: item,
+                textColor: TextColor.red,
+              ),
+            ))
+        .toList();
 
-    return Column(
-      children: [
-        const SizedBox(height: 30),
-        SizedBox(
-          width: 200,
-          child: AppText(
-            text: widget.title,
-            textColor: TextColor.red,
-            fontSize: widget.fontSize,
-          ),
-        ),
-        SizedBox(
-          width: 300,
-          child: DropdownButtonFormField<String>(
-            borderRadius: BorderRadius.circular(8),
-            focusColor: Theme.of(context).colorScheme.secondary,
-            decoration: const InputDecoration(
-              hintText: "Select value",
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 40),
+        child: Column(
+          children: [
+            const SizedBox(height: 30),
+            Container(
+              width: double.infinity,
+              child: AppText(
+                text: widget.title,
+                textColor: TextColor.red,
+                fontSize: widget.fontSize,
+              ),
             ),
-            items: items,
-            //value: _selectedValue, // Set the initial value
-            onChanged: (value) {
-              setState(() {
-                widget.controller?.text = value.toString();
-                print("${widget.title}: ${value!}");
-                _selectedValue = value; // Update state with selected value
-              });
-              // Call the onSaved callback with the selected value, but only if it's not null
-              if (widget.onSaved != null) {
-                widget.onSaved!(value!);
-              }
-            },
-          ),
+            SizedBox(
+              width: 300,
+              child: DropdownButtonFormField<String>(
+                borderRadius: BorderRadius.circular(8),
+                focusColor: Theme.of(context).colorScheme.secondary,
+                decoration: const InputDecoration(
+                  hintText: "Select value",
+                ),
+                items: items,
+                //value: _selectedValue, // Set the initial value
+                onChanged: (value) {
+                  setState(() {
+                    widget.controller?.text = value.toString();
+                    print("${widget.title}: ${value!}");
+                    _selectedValue = value; // Update state with selected value
+                  });
+                  // Call the onSaved callback with the selected value, but only if it's not null
+                  if (widget.onSaved != null) {
+                    widget.onSaved!(value!);
+                  }
+                },
+              ),
+            ),
+          ],
         ),
-      ],
+      ),
     );
   }
 }
