@@ -1,3 +1,4 @@
+import 'package:chat_app/components/forms/pretty_counter.dart';
 import 'package:chat_app/services/auth/authgate.dart';
 import 'package:chat_app/configs/app_routes.dart';
 import 'package:chat_app/firebase_options.dart';
@@ -23,11 +24,17 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
+    /*
     return MaterialApp(
       theme: Provider.of<ThemeProvider>(context).themeData,
       debugShowCheckedModeBanner: true,
       home: const AuthGate(),
       routes: AppRoutes.map, //LoginOrRegisterPage(),
     );
+    */
+    return MaterialApp(
+      home: prettyCounter(),
+    );
+    //return prettyCounter();
   }
 }
