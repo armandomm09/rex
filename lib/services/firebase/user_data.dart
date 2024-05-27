@@ -93,5 +93,19 @@ class UserData {
     }
   }
 
+  static Future<String> getUserBackgroundFoto() async {
+    try {
+      var firestoreImgInstance = await FirebaseFirestore.instance
+                          .collection("Users")
+                          .doc(FirebaseAuth.instance.currentUser!.uid)
+                          .get();
+    return firestoreImgInstance["backgroundImage"];                          
+    } catch (e) {
+      return "";
+    }
+    
+                    
+  }
+
   
 }

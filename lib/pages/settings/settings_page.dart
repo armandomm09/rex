@@ -1,9 +1,16 @@
+import 'dart:io';
+
 import 'package:chat_app/components/materialApp/app_drawer.dart';
 import 'package:chat_app/components/generals/app_text.dart';
+import 'package:chat_app/services/chat/chat_service.dart';
 import 'package:chat_app/styles/theme_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -13,14 +20,22 @@ class SelectedRegionalProvider extends ChangeNotifier {
 
   String get selectedRegional => _selectedRegional;
 
+
   set selectedRegional(String value) {
     _selectedRegional = value;
     notifyListeners(); // Notifica a los oyentes (widgets) que el valor ha cambiado
   }
 }
 
-class SettingsPage extends StatelessWidget {
+class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
+
+  @override
+  State<SettingsPage> createState() => _SettingsPageState();
+}
+
+class _SettingsPageState extends State<SettingsPage> {
+
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +54,19 @@ class _SettingsPage extends StatefulWidget {
 }
 
 class __SettingsPageState extends State<_SettingsPage> {
+  late File? _imageFile = null;
+  var imagePath;
+  final ChatService chatService = ChatService();
+  var backgroundImagePath = "assets/images/dominiSplash2.png";
 
+  Future<void> loadBackgroundImage() async{
+    await Hive.openBox("userData");
+    var imgInstance = await Hive.box("userData").get(1);
+    setState(() { 
+      backgroundImagePath = imgInstance;
+    });                          
+  }
+  
   @override
   void setState(fn) {
     if(mounted) {
@@ -63,7 +90,29 @@ class __SettingsPageState extends State<_SettingsPage> {
 
     String? currentRegional = "Select Regional";
 
+    Future<void> _pickImage() async {
+      
+      var source = ImageSource.gallery;
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: source);
 
+    setState(() {
+    
+      _imageFile = pickedFile != null ? File(pickedFile.path) : null;
+      imagePath = pickedFile?.path;
+
+      //messageToSend =
+    });
+    if(imagePath != null){
+   
+    await Hive.openBox("userData");
+    var userDataBox = Hive.box("userData");
+    userDataBox.put(1, imagePath);
+      setState(() {
+        backgroundImagePath = imagePath;
+      });
+    }
+  }
 
     setRegionalsWidgets(){
       for(int i=0; i<regionalsList.length; i++){
@@ -95,6 +144,7 @@ class __SettingsPageState extends State<_SettingsPage> {
     super.initState();
     getRegionalsList();
     getCurrentRegional();
+    loadBackgroundImage();
   }
 
   @override
@@ -168,7 +218,29 @@ class __SettingsPageState extends State<_SettingsPage> {
                     },
                   ),
                 ],
-              ))
+              )),
+
+              CupertinoFormSection(
+                
+                children: [
+                GestureDetector(
+                  onTap: () => _pickImage(),
+                  child: CupertinoFormRow(child: 
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                    const Text("Background Image"),
+                    SizedBox(
+                      height: 50,
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 8.0),
+                        child: Image.asset(backgroundImagePath, height: 50,),
+                      ),
+                    )
+                  ],)
+                  ),
+                )
+              ])
             ],
           ),
           const SizedBox(

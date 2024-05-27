@@ -10,7 +10,10 @@ import 'package:chat_app/components/forms/counter.dart';
 import 'package:chat_app/components/forms/form_dropdown.dart';
 import 'package:chat_app/models/match_scout.dart';
 import 'package:chat_app/services/firebase/scout_service.dart';
+import 'package:chat_app/services/firebase/user_data.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -76,7 +79,7 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
 
   TextEditingController autoCommentsController = TextEditingController();
   TextEditingController teleopCommentsController = TextEditingController();
-
+  String backgroundImagePath = "assets/images/dominiSplash2.png";
   String teamTitle = "Search team";
   var postsJson = [];
 
@@ -126,7 +129,20 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
   bool _isScrollingDown = true;
 
   ScrollController scrollController = ScrollController();
-
+  loadBackgroundImage() async {
+    await Hive.openBox("userData");
+    var imagePathGet = await Hive.box("userData").get(1);
+    print(imagePathGet);
+    setState(() {
+      backgroundImagePath = imagePathGet;
+    });
+  }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    loadBackgroundImage();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -179,7 +195,7 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
         decoration: BoxDecoration(
           image: DecorationImage(
             fit: BoxFit.cover,
-            image: AssetImage('assets/images/chat_background.png'))
+            image: AssetImage(backgroundImagePath))
         ),
         child: AppLiquidPullRefresh(
           backgroundColor: Color.fromARGB(140, 0, 0, 0),
@@ -654,7 +670,7 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
           text: "MATCH INFO",
           fontSize: 40,
           textColor: TextColor.gray,
-        ),
+        ).animate().shake().slide(),
         const SizedBox(
           height: 20,
         ),
@@ -1034,7 +1050,7 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
           ),
         )
       ],
-    );
+    ).animate().fade();
   }
 
   var qrImageViewData = "";
