@@ -64,6 +64,7 @@ dependencies:
   url_launcher: ^6.2.6
   ssh2: ^2.2.3
   uuid: ^3.0.7
+  responsive_framework: ^1.4.0
 
 dev_dependencies:
   flutter_test:
@@ -98,6 +99,7 @@ flutter:
     - assets/images/svgs/twitch-icon.svg
     - assets/images/svgs/sad-emoji-svgrepo-com.svg
     - assets/images/chat_background.png
+    - assets/images/dominiSplash2.png
 #    - assets/USA-Silhouette.svg
   uses-material-design: true
   fonts:

@@ -33,6 +33,10 @@ class _ChatPageState extends State<ChatPage> {
 
   final AuthService authService = AuthService();
 
+  final FocusNode userInputFocusNode = FocusNode();
+
+  final ScrollController scrollController = ScrollController();
+
   // ignore: avoid_init_to_null
   late File? _imageFile = null;
   var messageToSend;
@@ -210,7 +214,14 @@ class _ChatPageState extends State<ChatPage> {
             return const Text("Loading...");
           }
 
+           WidgetsBinding.instance.addPostFrameCallback((_) {
+            if (scrollController.hasClients) {   
+              scrollController.jumpTo(scrollController.position.maxScrollExtent);
+            }
+          });
+
           return ListView(
+            controller: scrollController,
             children: snapshot.data!.docs
                 .map((doc) => buildMessageItem(doc))
                 .toList(),
@@ -259,7 +270,7 @@ class _ChatPageState extends State<ChatPage> {
               ),
           ],
         ),
-      );
+      ).animate().fade();
     } catch (e) {
       return Container();
     }
@@ -285,7 +296,7 @@ class _ChatPageState extends State<ChatPage> {
                       imagePath,
                       height: 200,
                     )) //Image.file(_imageFile!, height: 200) // Mostrar la imagen seleccionada si existe
-                : AppTextField( height: 50,
+                : AppTextField( height: 50, focusNode: userInputFocusNode,
                     hintText: "Message", controller: messageController, padding: EdgeInsets.symmetric(horizontal: 20),),
           ),
           IconButton(

@@ -5,6 +5,7 @@ import 'package:chat_app/components/tiles/team_tile.dart';
 import 'package:chat_app/pages/publicSearch/team_season_details.dart';
 import 'package:chat_app/services/firebase/user_data.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 class FavoriteTeams extends StatefulWidget {
@@ -42,7 +43,7 @@ class _FavoriteTeamsState extends State<FavoriteTeams> {
                   UserData().deleteFavoriteTeam(teamID);
                   initializeData();
                 },
-              ),
+              ).animate().fade().shake(),
             ]),
             child: TeamTile(
               teamNickname: teamName,
