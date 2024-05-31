@@ -13,6 +13,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:hive/hive.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MyChats extends StatefulWidget {
@@ -29,19 +30,26 @@ class _MyChatsState extends State<MyChats> {
 
   final FirebaseAuth auth = FirebaseAuth.instance;
 
-  setCurrentRegional() async{
-      final SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setString("currentRegional", "Monterrey");
-    }
-
   
+  loadBackgroundImage() async {
+    try {
+      await Hive.openBox("userData");
+      var imagePathGet = await Hive.box("userData").get(1);
+      print(imagePathGet);
+    setState(() {
+      backgroundImagePath = imagePathGet;
+    });
+    } catch (e) {
+      print(e.toString());
+    }
+    
+  }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    setCurrentRegional();
-   
+    loadBackgroundImage();
   }
   @override
   void setState(fn) {
@@ -49,6 +57,8 @@ class _MyChatsState extends State<MyChats> {
       super.setState(fn);
     }
   }
+  String backgroundImagePath = "assets/images/dominiSplash2.png";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,10 +73,10 @@ class _MyChatsState extends State<MyChats> {
       body:   AppLiquidPullRefresh(
         onRefresh: () async {},
         child: Container(
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             image: DecorationImage(
                 fit: BoxFit.fill,
-                image: AssetImage('assets/images/chat_background.png'))),
+                image: AssetImage(backgroundImagePath))),
           child: Stack(
             children: [
               Positioned.fill(

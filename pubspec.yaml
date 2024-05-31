@@ -100,6 +100,7 @@ flutter:
     - assets/images/svgs/sad-emoji-svgrepo-com.svg
     - assets/images/chat_background.png
     - assets/images/dominiSplash2.png
+    - assets/images/svgs/rexi.svg
 #    - assets/USA-Silhouette.svg
   uses-material-design: true
   fonts:

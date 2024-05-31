@@ -4,7 +4,9 @@ import 'package:chat_app/components/materialApp/app_drawer.dart';
 import 'package:chat_app/components/tiles/team_tile.dart';
 import 'package:chat_app/pages/publicSearch/team_season_details.dart';
 import 'package:chat_app/services/firebase/user_data.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
@@ -33,17 +35,17 @@ class _FavoriteTeamsState extends State<FavoriteTeams> {
           var teamName = favorite_teams[0]["names"][index];
           var teamID = favorite_teams[0]["ids"][index];
           return Slidable(
-            startActionPane: ActionPane(motion: const ScrollMotion(), children: [
+            startActionPane:
+                ActionPane(motion: const ScrollMotion(), children: [
               SlidableAction(
                 icon: Icons.delete,
                 backgroundColor: Theme.of(context).colorScheme.inversePrimary,
                 foregroundColor: Colors.black,
-                spacing: 10,
                 onPressed: (BuildContext context) {
                   UserData().deleteFavoriteTeam(teamID);
                   initializeData();
                 },
-              ).animate().fade().shake(),
+              )
             ]),
             child: TeamTile(
               teamNickname: teamName,
@@ -78,7 +80,7 @@ class _FavoriteTeamsState extends State<FavoriteTeams> {
 
   @override
   void setState(fn) {
-    if(mounted) {
+    if (mounted) {
       super.setState(fn);
     }
   }

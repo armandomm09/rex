@@ -22,7 +22,7 @@ class _AppCounterState extends State<AppCounter> {
         children: [
           AppText(text: widget.counterTitle, textColor: TextColor.red, fontSize: 20,),
           Container(
-            //height: 80,
+            height: MediaQuery.of(context).size.height *0.1,
             width: 200,
             //padding: EdgeInsets.symmetric(),
             margin: const EdgeInsets.all(0),
@@ -44,7 +44,7 @@ class _AppCounterState extends State<AppCounter> {
                           Container(
                             padding: const EdgeInsets.symmetric(horizontal: 10),
                             margin: const EdgeInsets.symmetric(horizontal: 10),
-                            height: 40,
+                            height: 50,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               color: Theme.of(context).colorScheme.inversePrimary),

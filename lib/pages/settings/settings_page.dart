@@ -15,11 +15,9 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SelectedRegionalProvider extends ChangeNotifier {
-
   String _selectedRegional = "Select Regional";
 
   String get selectedRegional => _selectedRegional;
-
 
   set selectedRegional(String value) {
     _selectedRegional = value;
@@ -35,8 +33,6 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-
-
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -59,77 +55,81 @@ class __SettingsPageState extends State<_SettingsPage> {
   final ChatService chatService = ChatService();
   var backgroundImagePath = "assets/images/dominiSplash2.png";
 
-  Future<void> loadBackgroundImage() async{
-    await Hive.openBox("userData");
-    var imgInstance = await Hive.box("userData").get(1);
-    setState(() { 
-      backgroundImagePath = imgInstance;
-    });                          
+  Future<void> loadBackgroundImage() async {
+    try {
+      await Hive.openBox("userData");
+      var imgInstance = await Hive.box("userData").get(1);
+      setState(() {
+        backgroundImagePath = imgInstance;
+      });
+    } catch (e) {
+      print(e.toString());
+    }
   }
-  
+
   @override
   void setState(fn) {
-    if(mounted) {
+    if (mounted) {
       super.setState(fn);
     }
   }
-    List regionalsList = [];
-    List<Widget> regionalsWidgetList = [];
-    
-    Future<String?> getCurrentRegional() async{
-      final SharedPreferences prefs = await SharedPreferences.getInstance();
-      var string = prefs.getString("currentRegional");
-      currentRegional = string;
-      print(currentRegional);
-      return currentRegional;
-    }
-    setCurrentRegional(String regional) async{
-      final SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setString("currentRegional", regional);
-    }
 
-    String? currentRegional = "Select Regional";
+  List regionalsList = [];
+  List<Widget> regionalsWidgetList = [];
 
-    Future<void> _pickImage() async {
-      
-      var source = ImageSource.gallery;
+  Future<String?> getCurrentRegional() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    var string = prefs.getString("currentRegional");
+    currentRegional = string;
+    print(currentRegional);
+    return currentRegional;
+  }
+
+  setCurrentRegional(String regional) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString("currentRegional", regional);
+  }
+
+  String? currentRegional = "Select Regional";
+
+  Future<void> _pickImage() async {
+    var source = ImageSource.gallery;
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(source: source);
 
     setState(() {
-    
       _imageFile = pickedFile != null ? File(pickedFile.path) : null;
       imagePath = pickedFile?.path;
 
       //messageToSend =
     });
-    if(imagePath != null){
-   
-    await Hive.openBox("userData");
-    var userDataBox = Hive.box("userData");
-    userDataBox.put(1, imagePath);
+    if (imagePath != null) {
+      await Hive.openBox("userData");
+      var userDataBox = Hive.box("userData");
+      userDataBox.put(1, imagePath);
       setState(() {
         backgroundImagePath = imagePath;
       });
     }
   }
 
-    setRegionalsWidgets(){
-      for(int i=0; i<regionalsList.length; i++){
-        regionalsWidgetList.add(
-          Center(child: AppText(text: regionalsList[i]["name"], fontSize: 20, textColor: TextColor.red,))
-        );
-      }
+  setRegionalsWidgets() {
+    for (int i = 0; i < regionalsList.length; i++) {
+      regionalsWidgetList.add(Center(
+          child: AppText(
+        text: regionalsList[i]["name"],
+        fontSize: 20,
+        textColor: TextColor.red,
+      )));
     }
+  }
 
-     getRegionalsList() async {
-    var data = await FirebaseFirestore.instance
-        .collection("scouts")
-        .get();
+  getRegionalsList() async {
+    var data = await FirebaseFirestore.instance.collection("scouts").get();
 
     setState(() {
       regionalsList = data.docs;
-      
+
       // Ordena los documentos por el campo "match" convertido a entero
       for (int i = 0; i < regionalsList.length; i++) {
         print(regionalsList[i]["name"]);
@@ -138,7 +138,7 @@ class __SettingsPageState extends State<_SettingsPage> {
     setRegionalsWidgets();
   }
 
-    @override
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
@@ -177,20 +177,18 @@ class __SettingsPageState extends State<_SettingsPage> {
                                   height: 250,
                                   child: CupertinoPicker(
                                       itemExtent: 35,
-                                      onSelectedItemChanged:
-                                          (value) {
-                                            
-                                            setState(()  {
-                                              setCurrentRegional(regionalsList[value]["name"]);
-                                              getCurrentRegional();
-                                              //currentRegional = regionalsList[value]["name"];
-                                              //selectedRegionalProvider.selectedRegional =
-                                              //regionalsList[value]["name"];
-                                            });
-                                            //print(getCurrentRegional());
-                                            //print("provider" + selectedRegionalProvider.selectedRegional);
-                                            
-                                          },
+                                      onSelectedItemChanged: (value) {
+                                        setState(() {
+                                          setCurrentRegional(
+                                              regionalsList[value]["name"]);
+                                          getCurrentRegional();
+                                          //currentRegional = regionalsList[value]["name"];
+                                          //selectedRegionalProvider.selectedRegional =
+                                          //regionalsList[value]["name"];
+                                        });
+                                        //print(getCurrentRegional());
+                                        //print("provider" + selectedRegionalProvider.selectedRegional);
+                                      },
                                       children: regionalsWidgetList),
                                 )),
                         child: Text(
@@ -219,26 +217,32 @@ class __SettingsPageState extends State<_SettingsPage> {
                   ),
                 ],
               )),
-
-              CupertinoFormSection(
-                
-                children: [
+              CupertinoFormSection(children: [
                 GestureDetector(
                   onTap: () => _pickImage(),
-                  child: CupertinoFormRow(child: 
-                  Row(
+                  child: CupertinoFormRow(
+                      child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                    const Text("Background Image"),
-                    SizedBox(
-                      height: 50,
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 8.0),
-                        child: Image.asset(backgroundImagePath, height: 50,),
-                      ),
-                    )
-                  ],)
-                  ),
+                      const Text("Background Image"),
+                      SizedBox(
+                        height: 50,
+                        child: Padding(
+                          padding: const EdgeInsets.only(right: 8.0),
+                          child: Image.asset(
+                            errorBuilder: (BuildContext context,
+                                Object exception, StackTrace? stackTrace) {
+                              // Provide a fallback image or widget
+                              return Image.asset(
+                                  'assets/images/dominiSplash2.png');
+                            },
+                            backgroundImagePath,
+                            height: 50,
+                          ),
+                        ),
+                      )
+                    ],
+                  )),
                 )
               ])
             ],
@@ -249,5 +253,3 @@ class __SettingsPageState extends State<_SettingsPage> {
         ]));
   }
 }
-
-  
