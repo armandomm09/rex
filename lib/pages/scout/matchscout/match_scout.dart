@@ -130,12 +130,17 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
 
   ScrollController scrollController = ScrollController();
   loadBackgroundImage() async {
-    await Hive.openBox("userData");
-    var imagePathGet = await Hive.box("userData").get(1);
-    print(imagePathGet);
+    try {
+      await Hive.openBox("userData");
+      var imagePathGet = await Hive.box("userData").get(1);
+      print(imagePathGet);
     setState(() {
       backgroundImagePath = imagePathGet;
     });
+    } catch (e) {
+      print(e.toString());
+    }
+    
   }
   @override
   void initState() {

@@ -42,7 +42,7 @@ class ScoutGPTService{
       passwordOrKey: sshPassword);
 
     try {
-      await ssh.connect();
+      await ssh.connect().timeout(const Duration(seconds: 60));
       String? result = await ssh.execute('python3 scouting/scout_gpt/run.py "$question"');
       return result!;
     } catch (e) {

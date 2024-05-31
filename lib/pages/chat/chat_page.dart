@@ -13,6 +13,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:hive/hive.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ChatPage extends StatefulWidget {
@@ -53,6 +54,20 @@ class _ChatPageState extends State<ChatPage> {
   double imageYAlignment = 0;
 
   Widget imageOverlayer = Container();
+  var backgroundImagePath = "assets/images/dominiSplash2.png";
+
+  Future<void> loadBackgroundImage() async {
+    try {
+      await Hive.openBox("userData");
+      var imgInstance = await Hive.box("userData").get(1);
+      setState(() {
+        backgroundImagePath = imgInstance;
+      });
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
 
   void sendMessage() async {
     if (_imageFile != null || messageController.text.isNotEmpty) {
@@ -101,6 +116,7 @@ class _ChatPageState extends State<ChatPage> {
         startAnimation = true;
       });
     });
+    loadBackgroundImage();
   }
 
   @override
@@ -122,16 +138,16 @@ class _ChatPageState extends State<ChatPage> {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor:
-            Colors.transparent, //Theme.of(context).colorScheme.primary,
+            Color.fromARGB(145, 36, 32, 32), //Theme.of(context).colorScheme.primary,
         elevation: 0,
         foregroundColor: Theme.of(context).colorScheme.primary,
         title: Text(appBarTitle),
       ),
       body: Container(
-        decoration: const BoxDecoration(
+        decoration:  BoxDecoration(
             image: DecorationImage(
                 fit: BoxFit.fill,
-                image: AssetImage('assets/images/chat_background.png'))),
+                image: AssetImage(backgroundImagePath))),
         child: Stack(
           children: [
             Positioned.fill(
