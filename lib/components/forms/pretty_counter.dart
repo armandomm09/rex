@@ -16,21 +16,34 @@ class _prettyCounterState extends State<prettyCounter> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: SizedBox(
-          width: 100,
-          child: ElevatedButton(
-              style: ButtonStyle(
-                  backgroundColor: WidgetStatePropertyAll(Colors.red)),
-              onPressed: () {},
-              child: Row(
-                children: [
-                  Icon(Icons.add),
-                  Icon(Icons.minimize),
-                ],
-              )),
-        ),
+        body: Center(
+            child: Container(
+      width: 102,
+      height: 50,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(25),
+        color: Colors.red,
       ),
-    );
+      child: Row(
+        children: [
+          MaterialButton(
+              shape: CircleBorder(side: BorderSide(color: Colors.transparent)),
+              minWidth: 3,
+              onPressed: () {},
+              child: Text(
+                '-',
+                style: TextStyle(color: Colors.white, fontSize: 35),
+              )),
+          MaterialButton(
+              minWidth: 3,
+              shape: CircleBorder(side: BorderSide(color: Colors.transparent)),
+              onPressed: () {},
+              child: Text(
+                '+',
+                style: TextStyle(color: Colors.white, fontSize: 30),
+              )),
+        ],
+      ),
+    )));
   }
 }
