@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 class prettyCounter extends StatefulWidget {
-  const prettyCounter({super.key, this.controller});
+  const prettyCounter({
+    super.key,
+    this.controller,
+  });
 
   final TextEditingController? controller;
 
@@ -29,7 +32,15 @@ class _prettyCounterState extends State<prettyCounter> {
           MaterialButton(
               shape: CircleBorder(side: BorderSide(color: Colors.transparent)),
               minWidth: 3,
-              onPressed: () {},
+              onPressed: () {
+                setState(() {
+                  if (counter > 0) {
+                    counter -= 1;
+                    widget.controller?.text = counter.toString();
+                    print(widget.controller?.text);
+                  }
+                });
+              },
               child: Text(
                 '-',
                 style: TextStyle(color: Colors.white, fontSize: 35),
@@ -37,7 +48,13 @@ class _prettyCounterState extends State<prettyCounter> {
           MaterialButton(
               minWidth: 3,
               shape: CircleBorder(side: BorderSide(color: Colors.transparent)),
-              onPressed: () {},
+              onPressed: () {
+                setState(() {
+                  counter += 1;
+                  widget.controller?.text = counter.toString();
+                  print(widget.controller?.text);
+                });
+              },
               child: Text(
                 '+',
                 style: TextStyle(color: Colors.white, fontSize: 30),
