@@ -24,17 +24,19 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    /*
     return MaterialApp(
       theme: Provider.of<ThemeProvider>(context).themeData,
       debugShowCheckedModeBanner: true,
       home: const AuthGate(),
       routes: AppRoutes.map, //LoginOrRegisterPage(),
     );
-    */
+
+    // probar cosas:
+    /*
     return MaterialApp(
       home: prettyCounter(),
     );
+    */
     //return prettyCounter();
   }
 }
