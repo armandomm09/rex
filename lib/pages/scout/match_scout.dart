@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:ui';
 
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+import 'package:chat_app/components/forms/pretty_counter.dart';
 import 'package:chat_app/components/generals/liquid_pull_to_Refresh.dart';
 import 'package:chat_app/components/materialApp/app_drawer.dart';
 import 'package:chat_app/components/generals/app_text.dart';
@@ -343,8 +344,9 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
         const SizedBox(
           height: 40,
         ),
-        AppCounter(
-          counterTitle: "Notes scored on speaker",
+        AppText(text: "Notes scored in Auto"),
+        prettyCounter(
+          title: "Notes scored",
           controller: autoNotesOnSpeaker,
         ),
         const SizedBox(
@@ -364,24 +366,22 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
           height: 40,
         ),
         const AppText(
-          text: "Notes scored on:",
+          text: "Notes: ",
           fontSize: 40,
           textColor: TextColor.red,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            AppCounter(
-              counterTitle: "Speaker",
-              //width: 150,
+            prettyCounter(
+              title: "Speaker",
               controller: teleopSpeakerNotesController,
             ),
             const SizedBox(
               width: 20,
             ),
-            AppCounter(
-              counterTitle: "Amp:",
-              //width: 150,
+            prettyCounter(
+              title: "Amp",
               controller: teleopAmpNotesController,
             ),
           ],
@@ -412,17 +412,15 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            AppCounter(
-              counterTitle: "Times    amplified",
-              //width: 150,
+            prettyCounter(
+              title: "Times amplified",
               controller: teleopTimesAmplifiedController,
             ),
             const SizedBox(
               width: 20,
             ),
-            AppCounter(
-              counterTitle: "Speaker while amped:",
-              //width: 150,
+            prettyCounter(
+              title: "Notes amplified",
               controller: teleopSpeakerAmplifiedController,
             ),
           ],
@@ -738,8 +736,8 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
         const SizedBox(
           height: 40,
         ),
-        AppCounter(
-          counterTitle: "Notes scored on speaker",
+        prettyCounter(
+          title: "Notes scored",
           controller: autoNotesOnSpeaker,
         ),
         FormDropdown(
@@ -768,24 +766,22 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
           height: 40,
         ),
         const AppText(
-          text: "Notes scored on:",
+          text: "NOTES ON",
           fontSize: 40,
           textColor: TextColor.base,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            AppCounter(
-              counterTitle: "Speaker",
-              //width: 150,
+            prettyCounter(
+              title: "Speaker",
               controller: teleopSpeakerNotesController,
             ),
             const SizedBox(
               width: 20,
             ),
-            AppCounter(
-              counterTitle: "Amp:",
-              //width: 150,
+            prettyCounter(
+              title: "Amp",
               controller: teleopAmpNotesController,
             ),
           ],
@@ -811,17 +807,15 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            AppCounter(
-              counterTitle: "Times    amplified",
-              //width: 150,
+            prettyCounter(
+              title: "Times amplified",
               controller: teleopTimesAmplifiedController,
             ),
             const SizedBox(
               width: 20,
             ),
-            AppCounter(
-              counterTitle: "Speaker while amped:",
-              //width: 150,
+            prettyCounter(
+              title: "Speaker amplified",
               controller: teleopSpeakerAmplifiedController,
             ),
           ],
@@ -898,7 +892,7 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
         const AppText(
           text: "FINAL SCORES",
           fontSize: 40,
-          textColor: TextColor.gray,
+          textColor: TextColor.red,
         ),
         const SizedBox(
           height: 20,
@@ -906,7 +900,7 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
         const AppText(
           text: "Auto:",
           fontSize: 30,
-          textColor: TextColor.red,
+          textColor: TextColor.base,
         ),
         const SizedBox(
           height: 10,
@@ -921,7 +915,7 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
         const AppText(
           text: "Teleop:",
           fontSize: 30,
-          textColor: TextColor.red,
+          textColor: TextColor.base,
         ),
         const SizedBox(
           height: 10,
@@ -936,7 +930,7 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
         const AppText(
           text: "Final:",
           fontSize: 30,
-          textColor: TextColor.red,
+          textColor: TextColor.base,
         ),
         const SizedBox(
           height: 10,
@@ -951,7 +945,7 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
         const AppText(
           text: "Fouls:",
           fontSize: 30,
-          textColor: TextColor.red,
+          textColor: TextColor.base,
         ),
         const SizedBox(
           height: 10,
@@ -966,12 +960,12 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
         const AppText(
           text: "COMMENTS:",
           fontSize: 40,
-          textColor: TextColor.gray,
+          textColor: TextColor.base,
         ),
         const AppText(
           text: "Auto:",
           fontSize: 30,
-          textColor: TextColor.red,
+          textColor: TextColor.base,
         ),
         AppTextField(
           hintText: "Auto",
@@ -980,7 +974,7 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
         const AppText(
           text: "Teleop:",
           fontSize: 30,
-          textColor: TextColor.red,
+          textColor: TextColor.base,
         ),
         AppTextField(
           hintText: "Teleop",
