@@ -83,7 +83,7 @@ class HomePage extends StatelessWidget {
                   height: 100,
                   //width: 100, // Utiliza el ancho máximo disponible
                   child: Center(
-                      child: SvgPicture.asset("assets/images/svgs/rexi.svg", color: Colors.red,)),
+                      child: SvgPicture.asset("assets/images/svgs/rexi.svg",)),
                 ),
               ),
             ),
