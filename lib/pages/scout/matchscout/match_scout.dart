@@ -1069,7 +1069,7 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
     });
   }
 
-  void _showMessage(PostState state) {
+  void  _showMessage(PostState state) {
     final messenger = ScaffoldMessenger.of(context);
     final String title;
     final String message;
