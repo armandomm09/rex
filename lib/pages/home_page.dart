@@ -4,6 +4,7 @@ import 'package:chat_app/components/materialApp/app_drawer.dart';
 import 'package:chat_app/components/visualization/line_chart.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -74,6 +75,21 @@ class HomePage extends StatelessWidget {
               ),
             ),
           ),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child:  SizedBox(
+                  height: 100,
+                  //width: 100, // Utiliza el ancho máximo disponible
+                  child: Center(
+                      child: SvgPicture.asset("assets/images/svgs/rexi.svg",)),
+                ),
+              ),
+            ),
+          ),
+          
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.all(20),

@@ -22,13 +22,7 @@ class _ChatWithDatabaseState extends State<ChatWithDatabase> {
 
   @override
   void initState(){
-    focusNode.addListener(() {
-      if(focusNode.hasFocus){
-
-        Future.delayed(const Duration(milliseconds: 500),
-        () => scrollDown());
-      }
-    });
+    scrollDown();
     super.initState();
   }
 
@@ -40,10 +34,11 @@ class _ChatWithDatabaseState extends State<ChatWithDatabase> {
     super.dispose();
   }
   scrollDown() {
-    scrollController.animateTo(
-      scrollController.position.maxScrollExtent, 
-      duration: const Duration(seconds: 1), 
-      curve: Curves.bounceInOut);
+     WidgetsBinding.instance.addPostFrameCallback((_) {
+            if (scrollController.hasClients) {
+              scrollController.jumpTo(scrollController.position.maxScrollExtent);
+            }
+          });
   }
 
   askGptFromDB() async {
@@ -99,7 +94,7 @@ class _ChatWithDatabaseState extends State<ChatWithDatabase> {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Text("Loading...");
           }
-
+          scrollDown();
           return ListView(
             controller: scrollController,
             children: snapshot.data!.docs

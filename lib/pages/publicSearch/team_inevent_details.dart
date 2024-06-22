@@ -347,7 +347,6 @@ class _TeamInEventDetailsState extends State<TeamInEventDetails>
                               text: "Teleop note",
                             )),
                         Container(
-                            margin: const EdgeInsets.only(bottom: 8),
                             child: AppText(
                               text: TBATeamService.getTeleopNoteCount(
                                       extendedMatches, widget.team)
@@ -357,7 +356,7 @@ class _TeamInEventDetailsState extends State<TeamInEventDetails>
                       ]),
                     ),
                   ],
-                  options: CarouselOptions(height: 140),
+                  options: CarouselOptions(height: MediaQuery.of(context).size.height * 0.16),
                 ),
                 const SizedBox(
                   height: 20,

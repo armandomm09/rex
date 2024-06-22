@@ -4,6 +4,7 @@ import 'package:chat_app/components/generals/app_circular_progress.dart';
 import 'package:chat_app/components/generals/app_text.dart';
 import 'package:chat_app/components/generals/liquid_pull_to_Refresh.dart';
 import 'package:chat_app/components/tiles/teams_event_tile.dart';
+import 'package:chat_app/pages/publicSearch/team_inevent_details.dart';
 import 'package:chat_app/services/TBA/tba_team.dart';
 import 'package:chat_app/services/statbotics/statbotics_team.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,11 @@ class TeamSeasonDetails extends StatefulWidget {
   final String teamNickname;
   final String team;
   final String year;
-  const TeamSeasonDetails({super.key, required this.teamNickname, required this.team, required this.year});
+  const TeamSeasonDetails(
+      {super.key,
+      required this.teamNickname,
+      required this.team,
+      required this.year});
 
   @override
   State<TeamSeasonDetails> createState() => _TeamSeasonDetailsState();
@@ -21,15 +26,18 @@ class TeamSeasonDetails extends StatefulWidget {
 
 class _TeamSeasonDetailsState extends State<TeamSeasonDetails>
     with TickerProviderStateMixin {
-
   List<dynamic> extendedMatches = [];
-  
-  double avgMatch = 0.0, avgAuto = 0.0, avgStage = 0.0, winRate = 0.0, avgFouls = 0.0, avgTeleop = 0.0;
-  
+
+  double avgMatch = 0.0,
+      avgAuto = 0.0,
+      avgStage = 0.0,
+      winRate = 0.0,
+      avgFouls = 0.0,
+      avgTeleop = 0.0;
+
   bool isLoading = true;
 
   List events = [];
-
 
   late TabController tabController;
 
@@ -51,7 +59,7 @@ class _TeamSeasonDetailsState extends State<TeamSeasonDetails>
       extendedMatches = extendedMatches2;
       events = tbaEvents;
       try {
-        avgMatch = recortarDecimales(teamStatus["avgMatch"], 2) ;
+        avgMatch = recortarDecimales(teamStatus["avgMatch"], 2);
         avgAuto = recortarDecimales(teamStatus["avgAuto"], 2);
         avgStage = recortarDecimales(teamStatus["avgStage"], 2);
       } catch (e) {}
@@ -62,27 +70,28 @@ class _TeamSeasonDetailsState extends State<TeamSeasonDetails>
       isLoading = false;
     });
     var fouls = await TBATeamService.getFoulsAvg(extendedMatches, widget.team);
-    var teleop = await TBATeamService.getTeleopAvg(extendedMatches, widget.team);
-    if(mounted){
-    setState(() {
-      avgFouls = fouls;
-      avgTeleop = teleop;
-    });}
+    var teleop =
+        await TBATeamService.getTeleopAvg(extendedMatches, widget.team);
+    if (mounted) {
+      setState(() {
+        avgFouls = fouls;
+        avgTeleop = teleop;
+      });
+    }
     print(avgTeleop);
-   
 
     //print(extendedMatches[0]["score_breakdown"]["blue"]["teleopSpeakerNoteCount"]);
   }
 
   @override
   void setState(fn) {
-    if(mounted) {
+    if (mounted) {
       super.setState(fn);
     }
   }
+
   @override
   void initState() {
-    
     // TODO: implement initState
     super.initState();
     initializeData();
@@ -124,10 +133,16 @@ class _TeamSeasonDetailsState extends State<TeamSeasonDetails>
               Container(
                   child: Center(
                       child: AppLiquidPullRefresh(
-                          child: isLoading ? const AppCircularProgress() : getDetailsView(),
+                          child: isLoading
+                              ? const AppCircularProgress()
+                              : getDetailsView(),
                           onRefresh: () async {}))),
               Container(
-                child:  Center(child: isLoading ? const AppCircularProgress() : getEventsStream(),),
+                child: Center(
+                  child: isLoading
+                      ? const AppCircularProgress()
+                      : getEventsStream(),
+                ),
               ),
             ]),
           )
@@ -136,249 +151,242 @@ class _TeamSeasonDetailsState extends State<TeamSeasonDetails>
     );
   }
 
-  getEventsStream(){
+  getEventsStream() {
     return AppLiquidPullRefresh(
-            onRefresh: () =>getEventsStream(),
-            child: Center(
-              child: ListView.separated(
-                itemBuilder: (context, index) {
-                  var eventName;
-                  if (events[index]['short_name'] != "") {
-                    eventName = events[index]['short_name'];
-                  } else {
-                    eventName = events[index]['name'];
-                  }
-              
-                  var eventLocation =
-                      "${events[index]['city']}, ${events[index]['country']}";
-              
-                  var eventType = events[index]['event_type_string'];
-              
-                  return Column(
-                    children: [
-                      const SizedBox(height: 20,),
-                      TeamsEventTile(
-                        eventName: eventName,
-                        eventLocation: eventLocation,
-                        eventType: eventType,
-                                    
-                      ),
-                    ],
-                  );
-                },
-                separatorBuilder: (context, index) {
-                  return const SizedBox(
-                    height: 10,
-                  );
-                },
-                itemCount: events.length,
-              ),
-            ),
-          );
+      onRefresh: () => getEventsStream(),
+      child: Center(
+        child: ListView.separated(
+          itemBuilder: (context, index) {
+            var eventName;
+            if (events[index]['short_name'] != "") {
+              eventName = events[index]['short_name'];
+            } else {
+              eventName = events[index]['name'];
+            }
+
+            var eventLocation =
+                "${events[index]['city']}, ${events[index]['country']}";
+
+            var eventType = events[index]['event_type_string'];
+            var eventKey = events[index]['key'];
+
+            return Column(
+              children: [
+                SizedBox(
+                  height: 20,
+                ),
+                TeamsEventTile(
+                  onTap: (){ 
+                    Navigator.push(context, 
+                    MaterialPageRoute(
+                      builder: (context) => TeamInEventDetails(
+                          team: widget.team,
+                          eventKey: eventKey,
+                          teamNickname: widget.teamNickname))
+                    );
+                          },
+                  eventName: eventName,
+                  eventLocation: eventLocation,
+                  eventType: eventType,
+                ),
+              ],
+            );
+          },
+          separatorBuilder: (context, index) {
+            return const SizedBox(
+              height: 10,
+            );
+          },
+          itemCount: events.length,
+        ),
+      ),
+    );
   }
 
-  getDetailsView(){
+  getDetailsView() {
     return Column(
-                            children: [
-                              const SizedBox(
-                                height: 90,
-                              ),
-
-                      const SizedBox(height: 20,),
-                              
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .inversePrimary,
-                                    borderRadius:
-                                        BorderRadius.circular(8)),
-                                //height: 50,
-                                width: 120,
-                                child: Column(children: [
-                                  Container(
-                                      margin: const EdgeInsets.only(top: 15),
-                                      child: const AppText(
-                                        text: "Avg Match",
-                                      )),
-                                  Container(
-                                      margin: const EdgeInsets.symmetric(
-                                          vertical: 10),
-                                      child: AppText(
-                                        text: avgMatch.toString(),
-                                        fontSize: 30,
-                                      ))
-                                ]),
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Container(
-                                decoration: BoxDecoration(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .tertiary,
-                                    borderRadius:
-                                        BorderRadius.circular(8)),
-                                //height: 50,
-                                width: 120,
-                                child: Column(children: [
-                                  Container(
-                                      margin: const EdgeInsets.only(top: 15),
-                                      child: const AppText(
-                                        text: "Avg Auto",
-                                        textColor: TextColor.red,
-                                      )),
-                                  Container(
-                                      margin: const EdgeInsets.symmetric(
-                                          vertical: 10),
-                                      child: AppText(
-                                        text: avgAuto.toString(),
-                                        fontSize: 30,
-                                        textColor: TextColor.red,
-                                      ))
-                                ]),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .tertiary,
-                                    borderRadius:
-                                        BorderRadius.circular(8)),
-                                //height: 50,
-                                width: 120,
-                                child: Column(children: [
-                                  Container(
-                                      margin: const EdgeInsets.only(top: 15),
-                                      child: const AppText(
-                                        text: "Win Rate",
-                                        textColor: TextColor.red,
-                                      )),
-                                  Container(
-                                      margin: const EdgeInsets.symmetric(
-                                          vertical: 10),
-                                      child: CircularPercentIndicator(
-                                center: AppText(text: "${(recortarDecimales(winRate, 1) * 100).toString()}%", textColor: TextColor.red, fontSize: 20,),
-                                radius: 40,
-                                lineWidth: 8,
-                                percent: winRate,
-                                //progressColor: Theme.of(context).colorScheme.inversePrimary,
-                                backgroundColor:
-                                    Theme.of(context).colorScheme.primary,
-                                animation: true,
-                                rotateLinearGradient: true,
-                                linearGradient: const LinearGradient(
-                                    begin: Alignment.topLeft,
-                                    colors: [
-                                      Color.fromARGB(255, 83, 14, 14),
-                                      Color.fromARGB(255, 212, 35, 50),
-                                      Color.fromARGB(255, 137, 23, 32),
-                                    ]),
-                              ),)
-                                ]),
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Container(
-                                decoration: BoxDecoration(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .inversePrimary,
-                                    borderRadius:
-                                        BorderRadius.circular(8)),
-                                //height: 50,
-                                width: 120,
-                                child: Column(children: [
-                                  Container(
-                                      margin: const EdgeInsets.only(top: 15),
-                                      child: const AppText(
-                                        text: "Avg Stage",
-                                      )),
-                                  Container(
-                                      margin: const EdgeInsets.symmetric(
-                                          vertical: 10),
-                                      child: AppText(
-                                        text: avgStage.toString(),
-                                        fontSize: 30,
-                                        textColor: TextColor.black,
-                                      ))
-                                ]),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 10,),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .inversePrimary,
-                                    borderRadius:
-                                        BorderRadius.circular(8)),
-                                //height: 50,
-                                width: 120,
-                                child: Column(children: [
-                                  Container(
-                                      margin: const EdgeInsets.only(top: 15),
-                                      child: const AppText(
-                                        text: "Avg Fouls",
-                                      )),
-                                  Container(
-                                      margin: const EdgeInsets.symmetric(
-                                          vertical: 10),
-                                      child: AppText(
-                                        text: avgFouls.toString(),
-                                        fontSize: 30,
-                                      ))
-                                ]),
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Container(
-                                decoration: BoxDecoration(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .tertiary,
-                                    borderRadius:
-                                        BorderRadius.circular(8)),
-                                //height: 50,
-                                width: 120,
-                                child: Column(children: [
-                                  Container(
-                                      margin: const EdgeInsets.only(top: 15),
-                                      child: const AppText(
-                                        text: "Avg Teleop",
-                                        textColor: TextColor.red,
-                                      )),
-                                  Container(
-                                      margin: const EdgeInsets.symmetric(
-                                          vertical: 10),
-                                      child: AppText(
-                                        text: avgTeleop.toString(),
-                                        fontSize: 30,
-                                        textColor: TextColor.red,
-                                      ))
-                                ]),
-                              ),
-                            ],
-                          )
-                            ],
-                          );
+      children: [
+        const SizedBox(
+          height: 90,
+        ),
+        const SizedBox(
+          height: 20,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.inversePrimary,
+                  borderRadius: BorderRadius.circular(8)),
+              //height: 50,
+              width: 120,
+              child: Column(children: [
+                Container(
+                    margin: const EdgeInsets.only(top: 15),
+                    child: const AppText(
+                      text: "Avg Match",
+                    )),
+                Container(
+                    margin: const EdgeInsets.symmetric(vertical: 10),
+                    child: AppText(
+                      text: avgMatch.toString(),
+                      fontSize: 30,
+                    ))
+              ]),
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+            Container(
+              decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.tertiary,
+                  borderRadius: BorderRadius.circular(8)),
+              //height: 50,
+              width: 120,
+              child: Column(children: [
+                Container(
+                    margin: const EdgeInsets.only(top: 15),
+                    child: const AppText(
+                      text: "Avg Auto",
+                      textColor: TextColor.red,
+                    )),
+                Container(
+                    margin: const EdgeInsets.symmetric(vertical: 10),
+                    child: AppText(
+                      text: avgAuto.toString(),
+                      fontSize: 30,
+                      textColor: TextColor.red,
+                    ))
+              ]),
+            ),
+          ],
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.tertiary,
+                  borderRadius: BorderRadius.circular(8)),
+              //height: 50,
+              width: 120,
+              child: Column(children: [
+                Container(
+                    margin: const EdgeInsets.only(top: 15),
+                    child: const AppText(
+                      text: "Win Rate",
+                      textColor: TextColor.red,
+                    )),
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 10),
+                  child: CircularPercentIndicator(
+                    center: AppText(
+                      text:
+                          "${(recortarDecimales(winRate, 1) * 100).toString()}%",
+                      textColor: TextColor.red,
+                      fontSize: 20,
+                    ),
+                    radius: 40,
+                    lineWidth: 8,
+                    percent: winRate,
+                    //progressColor: Theme.of(context).colorScheme.inversePrimary,
+                    backgroundColor: Theme.of(context).colorScheme.primary,
+                    animation: true,
+                    rotateLinearGradient: true,
+                    linearGradient:
+                        const LinearGradient(begin: Alignment.topLeft, colors: [
+                      Color.fromARGB(255, 83, 14, 14),
+                      Color.fromARGB(255, 212, 35, 50),
+                      Color.fromARGB(255, 137, 23, 32),
+                    ]),
+                  ),
+                )
+              ]),
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+            Container(
+              decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.inversePrimary,
+                  borderRadius: BorderRadius.circular(8)),
+              //height: 50,
+              width: 120,
+              child: Column(children: [
+                Container(
+                    margin: const EdgeInsets.only(top: 15),
+                    child: const AppText(
+                      text: "Avg Stage",
+                    )),
+                Container(
+                    margin: const EdgeInsets.symmetric(vertical: 10),
+                    child: AppText(
+                      text: avgStage.toString(),
+                      fontSize: 30,
+                      textColor: TextColor.black,
+                    ))
+              ]),
+            ),
+          ],
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.inversePrimary,
+                  borderRadius: BorderRadius.circular(8)),
+              //height: 50,
+              width: 120,
+              child: Column(children: [
+                Container(
+                    margin: const EdgeInsets.only(top: 15),
+                    child: const AppText(
+                      text: "Avg Fouls",
+                    )),
+                Container(
+                    margin: const EdgeInsets.symmetric(vertical: 10),
+                    child: AppText(
+                      text: avgFouls.toString(),
+                      fontSize: 30,
+                    ))
+              ]),
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+            Container(
+              decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.tertiary,
+                  borderRadius: BorderRadius.circular(8)),
+              //height: 50,
+              width: 120,
+              child: Column(children: [
+                Container(
+                    margin: const EdgeInsets.only(top: 15),
+                    child: const AppText(
+                      text: "Avg Teleop",
+                      textColor: TextColor.red,
+                    )),
+                Container(
+                    margin: const EdgeInsets.symmetric(vertical: 10),
+                    child: AppText(
+                      text: avgTeleop.toString(),
+                      fontSize: 30,
+                      textColor: TextColor.red,
+                    ))
+              ]),
+            ),
+          ],
+        )
+      ],
+    );
   }
 }
