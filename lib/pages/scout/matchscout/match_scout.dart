@@ -135,20 +135,21 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
       await Hive.openBox("userData");
       var imagePathGet = await Hive.box("userData").get(1);
       print(imagePathGet);
-    setState(() {
-      backgroundImagePath = imagePathGet;
-    });
+      setState(() {
+        backgroundImagePath = imagePathGet;
+      });
     } catch (e) {
       print(e.toString());
     }
-    
   }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     loadBackgroundImage();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -199,16 +200,9 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
           )),
       body: Container(
         decoration: BoxDecoration(
-<<<<<<< HEAD:lib/pages/scout/match_scout.dart
             image: DecorationImage(
                 fit: BoxFit.cover,
                 image: AssetImage('assets/images/chat_background.png'))),
-=======
-          image: DecorationImage(
-            fit: BoxFit.cover,
-            image: AssetImage(backgroundImagePath))
-        ),
->>>>>>> main:lib/pages/scout/matchscout/match_scout.dart
         child: AppLiquidPullRefresh(
           backgroundColor: Color.fromARGB(140, 0, 0, 0),
           color: Color.fromARGB(116, 135, 10, 10),
@@ -1073,7 +1067,7 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
     });
   }
 
-  void  _showMessage(PostState state) {
+  void _showMessage(PostState state) {
     final messenger = ScaffoldMessenger.of(context);
     final String title;
     final String message;
