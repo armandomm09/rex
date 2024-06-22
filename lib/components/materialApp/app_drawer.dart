@@ -3,7 +3,7 @@ import 'package:chat_app/pages/databaseSearch/favorite_teams.dart';
 import 'package:chat_app/pages/home_page.dart';
 import 'package:chat_app/pages/publicSearch/analyze_match.dart';
 import 'package:chat_app/pages/chat/my_chats.dart';
-import 'package:chat_app/pages/scout/match_scout.dart';
+import 'package:chat_app/pages/scout/matchscout/match_scout.dart';
 import 'package:chat_app/services/auth/auth_service.dart';
 import 'package:chat_app/pages/settings/settings_page.dart';
 import 'package:chat_app/services/auth/authgate.dart';

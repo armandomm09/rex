@@ -50,6 +50,7 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(
                 height: 30,
               ),
+<<<<<<< HEAD
               const SizedBox(height: 300, width: 300, child: Center()
                   /*ModelViewer(
                     autoRotate: true,
@@ -57,6 +58,19 @@ class _LoginPageState extends State<LoginPage> {
                     backgroundColor: Colors.transparent,
                     src: "assets/images/stl/5887_3D.gltf"),*/
                   ),
+=======
+              const SizedBox(
+                height: 300,
+                width: 300,
+                child:  Center()
+                // ModelViewer(
+                //   autoRotate: true,
+                //   rotationPerSecond: "20deg",
+                //           backgroundColor: Colors.transparent,
+                //           src: "assets/images/stl/5887_3D.gltf"
+                //           ),
+              ),
+>>>>>>> main
               //Image.asset("assets/images/5887_trans.png", height: MediaQuery.of(context).size.height * 0.4,),
               const SizedBox(
                 height: 30,

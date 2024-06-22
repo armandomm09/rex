@@ -11,7 +11,10 @@ import 'package:chat_app/components/forms/counter.dart';
 import 'package:chat_app/components/forms/form_dropdown.dart';
 import 'package:chat_app/models/match_scout.dart';
 import 'package:chat_app/services/firebase/scout_service.dart';
+import 'package:chat_app/services/firebase/user_data.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -77,7 +80,7 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
 
   TextEditingController autoCommentsController = TextEditingController();
   TextEditingController teleopCommentsController = TextEditingController();
-
+  String backgroundImagePath = "assets/images/dominiSplash2.png";
   String teamTitle = "Search team";
   var postsJson = [];
 
@@ -127,7 +130,25 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
   bool _isScrollingDown = true;
 
   ScrollController scrollController = ScrollController();
-
+  loadBackgroundImage() async {
+    try {
+      await Hive.openBox("userData");
+      var imagePathGet = await Hive.box("userData").get(1);
+      print(imagePathGet);
+    setState(() {
+      backgroundImagePath = imagePathGet;
+    });
+    } catch (e) {
+      print(e.toString());
+    }
+    
+  }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    loadBackgroundImage();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -178,9 +199,16 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
           )),
       body: Container(
         decoration: BoxDecoration(
+<<<<<<< HEAD:lib/pages/scout/match_scout.dart
             image: DecorationImage(
                 fit: BoxFit.cover,
                 image: AssetImage('assets/images/chat_background.png'))),
+=======
+          image: DecorationImage(
+            fit: BoxFit.cover,
+            image: AssetImage(backgroundImagePath))
+        ),
+>>>>>>> main:lib/pages/scout/matchscout/match_scout.dart
         child: AppLiquidPullRefresh(
           backgroundColor: Color.fromARGB(140, 0, 0, 0),
           color: Color.fromARGB(116, 135, 10, 10),
@@ -653,7 +681,7 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
           text: "MATCH INFO",
           fontSize: 40,
           textColor: TextColor.gray,
-        ),
+        ).animate().shake().slide(),
         const SizedBox(
           height: 20,
         ),
@@ -1031,7 +1059,7 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
           ),
         )
       ],
-    );
+    ).animate().fade();
   }
 
   var qrImageViewData = "";
@@ -1045,7 +1073,7 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
     });
   }
 
-  void _showMessage(PostState state) {
+  void  _showMessage(PostState state) {
     final messenger = ScaffoldMessenger.of(context);
     final String title;
     final String message;
