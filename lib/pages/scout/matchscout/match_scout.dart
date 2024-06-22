@@ -130,26 +130,27 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
   bool _isScrollingDown = true;
 
   ScrollController scrollController = ScrollController();
-  
+
   loadBackgroundImage() async {
     try {
       await Hive.openBox("userData");
       var imagePathGet = await Hive.box("userData").get(1);
       print(imagePathGet);
-    setState(() {
-      backgroundImagePath = imagePathGet;
-    });
+      setState(() {
+        backgroundImagePath = imagePathGet;
+      });
     } catch (e) {
       print(e.toString());
     }
-    
   }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     loadBackgroundImage();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -201,8 +202,7 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
       body: Container(
         decoration: BoxDecoration(
             image: DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage(backgroundImagePath))),
+                fit: BoxFit.cover, image: AssetImage(backgroundImagePath))),
         child: AppLiquidPullRefresh(
           backgroundColor: Color.fromARGB(140, 0, 0, 0),
           color: Color.fromARGB(116, 135, 10, 10),
@@ -1011,16 +1011,16 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
             _showMessage(state);
           },
           child: Container(
-            //height: 40,
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.inversePrimary,
-              borderRadius: BorderRadius.circular(8),
+              color: Colors.red,
+              borderRadius: BorderRadius.circular(10),
             ),
             padding: const EdgeInsets.all(15),
             margin: const EdgeInsets.symmetric(horizontal: 25),
             child: const AppText(
               text: "Submit",
-              fontSize: 40,
+              fontSize: 20,
+              textColor: TextColor.base,
             ),
           ),
         ),
@@ -1034,22 +1034,28 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
           child: Container(
             //height: 40,
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.secondary,
-              borderRadius: BorderRadius.circular(8),
+              color: Colors.red,
+              borderRadius: BorderRadius.circular(10),
             ),
             padding: const EdgeInsets.all(15),
             margin: const EdgeInsets.symmetric(horizontal: 25),
             child: const AppText(
-              text: "Reload QR",
-              fontSize: 25,
+              text: "Reload QR Code",
+              fontSize: 20,
+              textColor: TextColor.black,
             ),
           ),
+        ),
+        SizedBox(
+          height: 20,
         ),
         Visibility(
           visible: true,
           child: QrImageView(
+            size: 200,
             data: qrImageViewData,
-            foregroundColor: Theme.of(context).colorScheme.inversePrimary,
+            foregroundColor: Colors.black,
+            backgroundColor: Colors.white,
           ),
         )
       ],
@@ -1067,7 +1073,7 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
     });
   }
 
-  void  _showMessage(PostState state) {
+  void _showMessage(PostState state) {
     final messenger = ScaffoldMessenger.of(context);
     final String title;
     final String message;

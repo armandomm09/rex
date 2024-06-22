@@ -28,7 +28,7 @@ class _prettyCounterState extends State<prettyCounter> {
         ),
         SizedBox(height: 20),
         Container(
-          width: 102,
+          width: 110,
           height: 50,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(25),
@@ -53,7 +53,7 @@ class _prettyCounterState extends State<prettyCounter> {
                     '-',
                     style: TextStyle(color: Colors.white, fontSize: 35),
                   )),
-              Text('holis'),
+              Text(counter.toString()),
               MaterialButton(
                   minWidth: 3,
                   shape:
