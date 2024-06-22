@@ -130,6 +130,7 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
   bool _isScrollingDown = true;
 
   ScrollController scrollController = ScrollController();
+  
   loadBackgroundImage() async {
     try {
       await Hive.openBox("userData");
@@ -199,16 +200,9 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
           )),
       body: Container(
         decoration: BoxDecoration(
-<<<<<<< HEAD:lib/pages/scout/match_scout.dart
             image: DecorationImage(
                 fit: BoxFit.cover,
-                image: AssetImage('assets/images/chat_background.png'))),
-=======
-          image: DecorationImage(
-            fit: BoxFit.cover,
-            image: AssetImage(backgroundImagePath))
-        ),
->>>>>>> main:lib/pages/scout/matchscout/match_scout.dart
+                image: AssetImage(backgroundImagePath))),
         child: AppLiquidPullRefresh(
           backgroundColor: Color.fromARGB(140, 0, 0, 0),
           color: Color.fromARGB(116, 135, 10, 10),
