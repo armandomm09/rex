@@ -1011,16 +1011,16 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
             _showMessage(state);
           },
           child: Container(
-            //height: 40,
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.inversePrimary,
-              borderRadius: BorderRadius.circular(8),
+              color: Colors.red,
+              borderRadius: BorderRadius.circular(10),
             ),
             padding: const EdgeInsets.all(15),
             margin: const EdgeInsets.symmetric(horizontal: 25),
             child: const AppText(
               text: "Submit",
-              fontSize: 40,
+              fontSize: 20,
+              textColor: TextColor.base,
             ),
           ),
         ),
@@ -1034,22 +1034,28 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
           child: Container(
             //height: 40,
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.secondary,
-              borderRadius: BorderRadius.circular(8),
+              color: Colors.red,
+              borderRadius: BorderRadius.circular(10),
             ),
             padding: const EdgeInsets.all(15),
             margin: const EdgeInsets.symmetric(horizontal: 25),
             child: const AppText(
-              text: "Reload QR",
-              fontSize: 25,
+              text: "Reload QR Code",
+              fontSize: 20,
+              textColor: TextColor.black,
             ),
           ),
+        ),
+        SizedBox(
+          height: 20,
         ),
         Visibility(
           visible: true,
           child: QrImageView(
+            size: 200,
             data: qrImageViewData,
-            foregroundColor: Theme.of(context).colorScheme.inversePrimary,
+            foregroundColor: Colors.black,
+            backgroundColor: Colors.white,
           ),
         )
       ],
