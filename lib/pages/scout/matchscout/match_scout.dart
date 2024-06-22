@@ -130,26 +130,27 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
   bool _isScrollingDown = true;
 
   ScrollController scrollController = ScrollController();
-  
+
   loadBackgroundImage() async {
     try {
       await Hive.openBox("userData");
       var imagePathGet = await Hive.box("userData").get(1);
       print(imagePathGet);
-    setState(() {
-      backgroundImagePath = imagePathGet;
-    });
+      setState(() {
+        backgroundImagePath = imagePathGet;
+      });
     } catch (e) {
       print(e.toString());
     }
-    
   }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     loadBackgroundImage();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -201,8 +202,7 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
       body: Container(
         decoration: BoxDecoration(
             image: DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage(backgroundImagePath))),
+                fit: BoxFit.cover, image: AssetImage(backgroundImagePath))),
         child: AppLiquidPullRefresh(
           backgroundColor: Color.fromARGB(140, 0, 0, 0),
           color: Color.fromARGB(116, 135, 10, 10),
@@ -1067,7 +1067,7 @@ class _NewMatchScoutingState extends State<NewMatchScouting> {
     });
   }
 
-  void  _showMessage(PostState state) {
+  void _showMessage(PostState state) {
     final messenger = ScaffoldMessenger.of(context);
     final String title;
     final String message;
