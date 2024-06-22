@@ -53,6 +53,7 @@ class _prettyCounterState extends State<prettyCounter> {
                     '-',
                     style: TextStyle(color: Colors.white, fontSize: 35),
                   )),
+              Text('holis'),
               MaterialButton(
                   minWidth: 3,
                   shape:
